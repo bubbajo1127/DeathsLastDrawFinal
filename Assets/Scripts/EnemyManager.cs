@@ -18,8 +18,6 @@ public class EnemyManager : MonoBehaviour
     {
         currentHealth -= damage;
 
-        currentHealth -= damage;
-
         Debug.Log($"{gameObject.name} took {damage} damage. " + $"Health: {currentHealth}/{maxHealth}");
 
         if (currentHealth <= 0f)
