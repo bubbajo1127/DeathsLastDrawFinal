@@ -21,28 +21,18 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        HandleMovementInput();
         HandleStopInput();
-    }
-
-    private void HandleMovementInput()
-    {
-        if(inputManager.LeftClickPressed && inputManager.HasMouseHit)
-        {
-            MoveToPosition(inputManager.MouseWorldPosition);
-        }
     }
 
     private void HandleStopInput()
     {
         if (inputManager.StopMovementPressed)
         {
-            navMeshAgent.ResetPath();
+            StopMovement();
         }
     }
 
-
-    private void MoveToPosition(Vector3 destination)
+    public void MoveToPosition(Vector3 destination)
     {
         if(NavMesh.SamplePosition(
             destination,
@@ -50,7 +40,26 @@ public class PlayerMovement : MonoBehaviour
             2f,
             NavMesh.AllAreas))
         {
+            navMeshAgent.stoppingDistance = stoppingDistance;
             navMeshAgent.SetDestination(navHit.position);
         }
+    }
+
+    public void MoveToTarget(Transform target, float distance)
+    {
+        if (target == null) return;
+
+        navMeshAgent.stoppingDistance = distance;
+        navMeshAgent.SetDestination(target.position);
+    }
+
+    public void StopMovement()
+    {
+        navMeshAgent.ResetPath();
+    }
+
+    public bool IsMoving()
+    {
+        return navMeshAgent.hasPath && navMeshAgent.remainingDistance > navMeshAgent.stoppingDistance;
     }
 }
