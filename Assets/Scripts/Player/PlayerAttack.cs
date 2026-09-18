@@ -3,12 +3,9 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    [Header("References")]
     [SerializeField] private PlayerMovement movement;
-
-    [Header("Attack")]
-    [SerializeField] private float attackRange = 8f;
-    [SerializeField] private float attackSpeed = 1f;
-    [SerializeField] private float attackDamage = 10f;
+    [SerializeField] private PlayerStats playerStats;
 
     private EnemyManager currentEnemy;
 
@@ -36,16 +33,14 @@ public class PlayerAttack : MonoBehaviour
 
     private void HandleCurrentEnemy()
     {
-        if (currentEnemy == null)
-            return;
+        if (currentEnemy == null) return;
 
         TryAttackingEnemy();
     }
 
     private void TryAttackingEnemy()
     {
-        if (currentEnemy == null)
-            return;
+        if (currentEnemy == null) return;
 
         float distance = Vector3.Distance(
             transform.position,
@@ -53,13 +48,13 @@ public class PlayerAttack : MonoBehaviour
         );
 
         // Enemy is outside attack range.
-        if (distance > attackRange)
+        if (distance > playerStats.AttackRange)
         {
             if (!isAttacking)
             {
                 movement.MoveToTarget(
                     currentEnemy.transform,
-                    attackRange
+                    playerStats.AttackRange
                 );
             }
 
@@ -70,12 +65,10 @@ public class PlayerAttack : MonoBehaviour
         movement.StopMovement();
 
         // Already preparing an attack.
-        if (isAttacking)
-            return;
+        if (isAttacking) return;
 
         // Still on attack cooldown.
-        if (Time.time < nextAttackTime)
-            return;
+        if (Time.time < nextAttackTime) return;
 
         BeginAttack();
     }
@@ -94,8 +87,7 @@ public class PlayerAttack : MonoBehaviour
 
     public void FireProjectile()
     {
-        if (!isAttacking)
-            return;
+        if (!isAttacking) return;
 
         if (currentEnemy == null)
         {
@@ -104,7 +96,7 @@ public class PlayerAttack : MonoBehaviour
         }
 
         // Temporary damage behavior.
-        currentEnemy.TakeDamage(attackDamage);
+        currentEnemy.TakeDamage(playerStats.AttackDamage);
 
         FinishAttack();
     }
@@ -113,8 +105,8 @@ public class PlayerAttack : MonoBehaviour
     {
         isAttacking = false;
 
-        // attackSpeed = attacks per second.
-        float attackCooldown = 1f / attackSpeed;
+        // AttackSpeed = attacks per second.
+        float attackCooldown = 1f / playerStats.AttackSpeed;
 
         nextAttackTime = Time.time + attackCooldown;
     }
@@ -137,14 +129,13 @@ public class PlayerAttack : MonoBehaviour
 
     public bool IsTargetInRange()
     {
-        if (currentEnemy == null)
-            return false;
+        if (currentEnemy == null) return false;
 
         float distance = Vector3.Distance(
             transform.position,
             currentEnemy.transform.position
         );
 
-        return distance <= attackRange;
+        return distance <= playerStats.AttackRange;
     }
 }

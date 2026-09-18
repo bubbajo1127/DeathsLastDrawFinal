@@ -522,6 +522,7 @@ GameObject:
   m_Component:
   - component: {fileID: 556708937}
   - component: {fileID: 556708936}
+  - component: {fileID: 556708938}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -559,6 +560,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &556708938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 556708935}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c67fa352ed122541817d8f7e62fbb06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Stats
+  maxHealth: 100
+  attackDamage: 10
+  movementSpeed: 5
 --- !u!1 &1252403378
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,6 +588,7 @@ GameObject:
   - component: {fileID: 1252403381}
   - component: {fileID: 1252403380}
   - component: {fileID: 1252403379}
+  - component: {fileID: 1252403384}
   m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
@@ -591,8 +608,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 961684dcdfbb63549bafa97dc2eb1e7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
-  maxHealth: 100
-  damage: 10
+  enemyStats: {fileID: 1252403384}
 --- !u!135 &1252403380
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -686,6 +702,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1252403384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1252403378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f9f44c52b61b9f47afe6f1d8ddedd79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
+  maxHealth: 100
+  attackDamage: 10
+  movementSpeed: 5
 --- !u!1 &1408783839
 GameObject:
   m_ObjectHideFlags: 0
@@ -958,6 +989,7 @@ GameObject:
   - component: {fileID: 2015182970}
   - component: {fileID: 2015182977}
   - component: {fileID: 2015182976}
+  - component: {fileID: 2015182978}
   - component: {fileID: 2015182975}
   m_Layer: 0
   m_Name: TestPlayer
@@ -1126,9 +1158,27 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack
   movement: {fileID: 2015182970}
+  playerStats: {fileID: 2015182978}
+--- !u!114 &2015182978
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015182969}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dbec44db9f764984c9eadb8480d67f2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
+  maxHealth: 100
+  attackDamage: 10
+  movementSpeed: 5
   attackRange: 8
   attackSpeed: 1
-  attackDamage: 10
+  damageReduction: 0
+  mana: 100
+  coins: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

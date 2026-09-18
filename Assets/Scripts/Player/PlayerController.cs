@@ -9,19 +9,16 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (!inputManager.RightClickPressed)
-            return;
+        if (!inputManager.RightClickPressed) return;
 
         HandleRightClick();
     }
 
     private void HandleRightClick()
     {
-        if (!inputManager.HasMouseHit)
-            return;
+        if (!inputManager.HasMouseHit) return;
 
-        EnemyManager enemy =
-            inputManager.MouseHit.collider.GetComponentInParent<EnemyManager>();
+        EnemyManager enemy = inputManager.MouseHit.collider.GetComponentInParent<EnemyManager>();
 
         // Right-clicked an enemy.
         if (enemy != null)

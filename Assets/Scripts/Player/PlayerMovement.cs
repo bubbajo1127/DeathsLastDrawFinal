@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         navMeshAgent.stoppingDistance = stoppingDistance;
+        navMeshAgent.updateRotation = true;
     }
 
     private void Update()
