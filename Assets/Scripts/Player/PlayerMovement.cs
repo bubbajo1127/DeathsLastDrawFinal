@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private InputManager inputManager;
+    [SerializeField] private PlayerStats playerStats;
 
     private NavMeshAgent navMeshAgent;
 
@@ -17,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
         navMeshAgent = GetComponent<NavMeshAgent>();
 
         navMeshAgent.stoppingDistance = stoppingDistance;
+        navMeshAgent.speed = playerStats.MovementSpeed;
         navMeshAgent.updateRotation = true;
     }
 

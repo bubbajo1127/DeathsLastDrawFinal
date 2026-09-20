@@ -1011,6 +1011,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
   inputManager: {fileID: 556708936}
+  playerStats: {fileID: 2015182978}
   stoppingDistance: 0.1
 --- !u!136 &2015182971
 CapsuleCollider:
@@ -1173,8 +1174,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   maxHealth: 100
   attackDamage: 10
-  movementSpeed: 5
-  attackRange: 8
+  movementSpeed: 6
+  attackRange: 6
   attackSpeed: 1
   damageReduction: 0
   mana: 100
