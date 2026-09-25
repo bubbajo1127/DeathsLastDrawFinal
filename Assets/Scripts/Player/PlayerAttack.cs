@@ -7,6 +7,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private PlayerMovement movement;
     [SerializeField] private PlayerStats playerStats;
 
+    [Header("Projectile")]
+    [SerializeField] private PlayerProjectile projectilePrefab;
+    [SerializeField] private Transform projectileSpawnPoint;
+
     private EnemyManager currentEnemy;
 
     private bool isAttacking;
@@ -86,20 +90,21 @@ public class PlayerAttack : MonoBehaviour
     }
 
     public void FireProjectile()
+{
+    if (!isAttacking) return;
+
+    if (currentEnemy == null)
     {
-        if (!isAttacking) return;
-
-        if (currentEnemy == null)
-        {
-            isAttacking = false;
-            return;
-        }
-
-        // Temporary damage behavior.
-        currentEnemy.TakeDamage(playerStats.AttackDamage);
-
-        FinishAttack();
+        isAttacking = false;
+        return;
     }
+
+    PlayerProjectile projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+
+    projectile.Initialize(currentEnemy, playerStats.AttackDamage);
+
+    FinishAttack();
+}
 
     private void FinishAttack()
     {
