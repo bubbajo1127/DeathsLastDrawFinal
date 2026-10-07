@@ -67,4 +67,11 @@ public class PlayerStats : Stats
     {
         if (amount > 0f) damageReduction = Mathf.Clamp01(damageReduction + amount);
     }
+
+    public override void TakeDamage(float damage)
+    {
+        float finalDamage = damage * (1f - DamageReduction);
+
+        base.TakeDamage(finalDamage);
+    }
 }
