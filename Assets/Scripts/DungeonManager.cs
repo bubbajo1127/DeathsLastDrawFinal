@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem;
 
 public class DungeonManager : MonoBehaviour
 {
@@ -18,12 +17,21 @@ public class DungeonManager : MonoBehaviour
         LoadRandomRoom();
     }
 
-    private void Update()
+    public void ChooseDoor(RoomDoor selectedDoor)
     {
-        if (Keyboard.current != null && Keyboard.current.nKey.wasPressedThisFrame)
-        {
-            LoadRandomRoom();
-        }
+        if (selectedDoor == null)
+            return;
+
+        Debug.Log("Door chosen!");
+
+        // Eventually:
+        // Apply reward from selectedDoor
+        // Play door animation
+        // Fade to black
+        // Load next room
+        // Fade back in
+
+        LoadRandomRoom();
     }
 
     public void LoadRandomRoom()

@@ -6,29 +6,62 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private InputManager inputManager;
     [SerializeField] private PlayerMovement playerMovement;
     [SerializeField] private PlayerAttack playerCombat;
+    [SerializeField] private PlayerDoorInteraction doorInteraction;
 
     private void Update()
     {
-        if (!inputManager.RightClickPressed) return;
+        if (!inputManager.RightClickPressed)
+            return;
 
         HandleRightClick();
     }
 
     private void HandleRightClick()
     {
-        if (!inputManager.HasMouseHit) return;
+        if (!inputManager.HasMouseHit)
+            return;
 
-        EnemyManager enemy = inputManager.MouseHit.collider.GetComponentInParent<EnemyManager>();
+        // -------------------------
+        // Enemy
+        // -------------------------
 
-        // Right-clicked an enemy.
+        EnemyManager enemy =
+            inputManager.MouseHit.collider.GetComponentInParent<EnemyManager>();
+
         if (enemy != null)
         {
+            doorInteraction.CancelDoorInteraction();
+
             playerCombat.SetAttackTarget(enemy);
+
             return;
         }
 
-        // Right-clicked the ground.
+        // -------------------------
+        // Door
+        // -------------------------
+
+        RoomDoor door =
+            inputManager.MouseHit.collider.GetComponentInParent<RoomDoor>();
+
+        if (door != null)
+        {
+            playerCombat.CancelAttack();
+
+            doorInteraction.SetDoorTarget(door);
+
+            return;
+        }
+
+        // -------------------------
+        // Ground
+        // -------------------------
+
         playerCombat.CancelAttack();
-        playerMovement.MoveToPosition(inputManager.MouseWorldPosition);
+        doorInteraction.CancelDoorInteraction();
+
+        playerMovement.MoveToPosition(
+            inputManager.MouseWorldPosition
+        );
     }
 }
