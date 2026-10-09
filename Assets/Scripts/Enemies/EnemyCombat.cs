@@ -9,22 +9,17 @@ public abstract class EnemyCombat : MonoBehaviour
 
     public bool TryAttack(PlayerStats target)
     {
-        if (target == null)
-            return false;
+        if (target == null) return false;
 
-        if (target.IsDead())
-            return false;
+        if (target.IsDead()) return false;
 
-        if (Time.time < nextAttackTime)
-            return false;
+        if (Time.time < nextAttackTime) return false;
 
         PerformAttack(target);
 
-        float attackCooldown =
-            1f / Mathf.Max(enemyStats.AttackSpeed, 0.01f);
+        float attackCooldown = 1f / Mathf.Max(enemyStats.AttackSpeed, 0.01f);
 
-        nextAttackTime =
-            Time.time + attackCooldown;
+        nextAttackTime = Time.time + attackCooldown;
 
         return true;
     }

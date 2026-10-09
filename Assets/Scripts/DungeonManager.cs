@@ -10,11 +10,17 @@ public class DungeonManager : MonoBehaviour
     [SerializeField] private Transform player;
     [SerializeField] private NavMeshAgent playerAgent;
 
+    [Header("Testing")]
+    [SerializeField] private bool enableRoomGeneration = true;
+
     private RoomController currentRoom;
 
     private void Start()
     {
-        LoadRandomRoom();
+        if (enableRoomGeneration) //for testing
+        {
+            LoadRandomRoom();
+        }
     }
 
     public void ChooseDoor(RoomDoor selectedDoor)
@@ -36,16 +42,15 @@ public class DungeonManager : MonoBehaviour
 
     public void LoadRandomRoom()
     {
-        // Destroy previous room.
+        if (!enableRoomGeneration) return;  //for testing
+
         if (currentRoom != null)
         {
             Destroy(currentRoom.gameObject);
         }
 
-        // Pick random room.
         int randomIndex = Random.Range(0, roomPrefabs.Length);
 
-        // Spawn the room at the origin.
         currentRoom = Instantiate(
             roomPrefabs[randomIndex],
             Vector3.zero,

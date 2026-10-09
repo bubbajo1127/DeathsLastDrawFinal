@@ -6,11 +6,6 @@ public class MeleeEnemyCombat : EnemyCombat
     {
         target.TakeDamage(enemyStats.AttackDamage);
 
-        Debug.Log(
-            gameObject.name +
-            " attacked the player for " +
-            enemyStats.AttackDamage +
-            " damage."
-        );
+        Debug.Log(gameObject.name + " attacked the player for " + enemyStats.AttackDamage + " damage.");
     }
 }
