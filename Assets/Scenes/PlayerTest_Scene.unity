@@ -4846,7 +4846,7 @@ MonoBehaviour:
   movementSpeed: 6
   attackRange: 6
   attackSpeed: 1
-  damageReduction: 0
+  damageReduction: 0.51
   mana: 100
   coins: 0
 --- !u!114 &1961837326

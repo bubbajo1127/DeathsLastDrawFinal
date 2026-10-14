@@ -70,8 +70,18 @@ public class PlayerStats : Stats
 
     public override void TakeDamage(float damage)
     {
-        float finalDamage = damage * (1f - DamageReduction);
+        if (damage <= 0f)
+            return;
+
+        float reduction = Mathf.Clamp01(DamageReduction);
+
+        float finalDamage = damage * (1f - reduction);
 
         base.TakeDamage(finalDamage);
+
+        if (IsDead())
+        {
+            Debug.Log("Player died!");
+        }
     }
 }
