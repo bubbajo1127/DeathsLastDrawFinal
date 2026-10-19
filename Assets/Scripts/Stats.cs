@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class Stats : MonoBehaviour
@@ -19,6 +20,10 @@ public class Stats : MonoBehaviour
     public float AttackDamage => attackDamage;
     public float MovementSpeed => movementSpeed;
 
+    // Sends:
+    // CurrentHealth, MaxHealth
+    public event Action<float, float> OnHealthChanged;
+
     protected virtual void Awake()
     {
         CurrentHealth = maxHealth;
@@ -26,24 +31,50 @@ public class Stats : MonoBehaviour
 
     public virtual void TakeDamage(float damage)
     {
-        if (damage <= 0f) return;
+        if (damage <= 0f)
+            return;
+
+        if (IsDead())
+            return;
 
         CurrentHealth -= damage;
 
         // Prevent health from going below zero.
         CurrentHealth = Mathf.Max(CurrentHealth, 0f);
 
-        Debug.Log($"{gameObject.name} took {damage} damage. " + $"Health: {CurrentHealth}/{MaxHealth}");
+        // Tell anything listening that health changed.
+        OnHealthChanged?.Invoke(
+            CurrentHealth,
+            MaxHealth
+        );
+
+        Debug.Log(
+            $"{gameObject.name} took {damage} damage. " +
+            $"Health: {CurrentHealth}/{MaxHealth}"
+        );
     }
 
     public virtual void Heal(float amount)
     {
-        if (amount <= 0f) return;
+        if (amount <= 0f)
+            return;
+
+        if (IsDead())
+            return;
 
         CurrentHealth += amount;
 
         // Prevent health from going above max health.
-        CurrentHealth = Mathf.Min(CurrentHealth, MaxHealth);
+        CurrentHealth = Mathf.Min(
+            CurrentHealth,
+            MaxHealth
+        );
+
+        // Tell anything listening that health changed.
+        OnHealthChanged?.Invoke(
+            CurrentHealth,
+            MaxHealth
+        );
     }
 
     public bool IsDead()
