@@ -5199,10 +5199,12 @@ GameObject:
   - component: {fileID: 1961837330}
   - component: {fileID: 1961837329}
   - component: {fileID: 1961837328}
+  - component: {fileID: 1961837333}
   - component: {fileID: 1961837327}
   - component: {fileID: 1961837325}
   - component: {fileID: 1961837326}
   - component: {fileID: 1961837324}
+  - component: {fileID: 1961837332}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Untagged
@@ -5314,6 +5316,7 @@ MonoBehaviour:
   playerStats: {fileID: 1961837325}
   projectilePrefab: {fileID: 7089824999751572010, guid: 595429976368ed946804af12e934e89c, type: 3}
   projectileSpawnPoint: {fileID: 141345937}
+  playerAnimator: {fileID: 0}
 --- !u!114 &1961837329
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5401,6 +5404,43 @@ MeshRenderer:
   m_SortingOrder: 0
   m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &1961837332
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961837322}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: b76b8dc48b5d9c348a66d6cd053d23c8, type: 3}
+  m_Controller: {fileID: 9100000, guid: 0d14cd6b57015fa439712bd41de1b533, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1961837333
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961837322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d78ddee67c6154985ea0fc0595d7c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimator
+  animator: {fileID: 1961837332}
+  navMeshAgent: {fileID: 1961837324}
+  animationDampTime: 0.1
 --- !u!1 &1964890140
 GameObject:
   m_ObjectHideFlags: 0

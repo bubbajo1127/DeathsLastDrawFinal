@@ -10,6 +10,7 @@ public class PlayerAttack : MonoBehaviour
     [Header("Projectile")]
     [SerializeField] private PlayerProjectile projectilePrefab;
     [SerializeField] private Transform projectileSpawnPoint;
+    [SerializeField] private PlayerAnimator playerAnimator;
 
     private EnemyManager currentEnemy;
 
@@ -81,12 +82,8 @@ public class PlayerAttack : MonoBehaviour
     {
         isAttacking = true;
 
-        // Future:
-        // animator.SetTrigger("Attack");
-
-        // Temporary testing behavior:
-        // Fire immediately.
-        FireProjectile();
+        playerAnimator.PlayShoot();
+        //FireProjectile();
     }
 
     public void FireProjectile()
