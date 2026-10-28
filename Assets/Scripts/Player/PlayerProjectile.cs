@@ -30,6 +30,7 @@ public class PlayerProjectile : MonoBehaviour
     private void MoveTowardsTarget()
     {
         transform.position = Vector3.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);
+        transform.LookAt(target.transform);
     }
 
     private void CheckForHit()

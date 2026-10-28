@@ -594,11 +594,11 @@ Transform:
   m_GameObject: {fileID: 141345936}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.056, y: 1.41, z: 0}
+  m_LocalPosition: {x: 0.051, y: 1.4100001, z: 0.515}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 282142404}
+  m_Father: {fileID: 282142403}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &167743099
 GameObject:
@@ -968,7 +968,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
   maxHealth: 100
   attackDamage: 10
-  movementSpeed: 5
+  movementSpeed: 0.1
   attackRange: 1.5
   attackSpeed: 1
   detectionRange: 15
@@ -1095,7 +1095,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b76b8dc48b5d9c348a66d6cd053d23c8, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.9
+      value: -0.888
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b76b8dc48b5d9c348a66d6cd053d23c8, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1129,14 +1129,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6127488227019289725, guid: b76b8dc48b5d9c348a66d6cd053d23c8, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.723
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: b76b8dc48b5d9c348a66d6cd053d23c8, type: 3}
       propertyPath: m_Name
       value: Erika Archer With Bow Arrow
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4936884950917866777, guid: b76b8dc48b5d9c348a66d6cd053d23c8, type: 3}
     m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: -749876600356752593, guid: b76b8dc48b5d9c348a66d6cd053d23c8, type: 3}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: b76b8dc48b5d9c348a66d6cd053d23c8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 141345937}
     m_AddedComponents: []
@@ -1144,11 +1149,6 @@ PrefabInstance:
 --- !u!4 &282142403 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b76b8dc48b5d9c348a66d6cd053d23c8, type: 3}
-  m_PrefabInstance: {fileID: 282142402}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &282142404 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -749876600356752593, guid: b76b8dc48b5d9c348a66d6cd053d23c8, type: 3}
   m_PrefabInstance: {fileID: 282142402}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &282885994
@@ -5221,7 +5221,7 @@ Transform:
   m_GameObject: {fileID: 1961837322}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.15, y: 1.72, z: 4.3}
+  m_LocalPosition: {x: -2.92, y: 1.72, z: 6.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5316,7 +5316,7 @@ MonoBehaviour:
   playerStats: {fileID: 1961837325}
   projectilePrefab: {fileID: 7089824999751572010, guid: 595429976368ed946804af12e934e89c, type: 3}
   projectileSpawnPoint: {fileID: 141345937}
-  playerAnimator: {fileID: 0}
+  playerAnimator: {fileID: 1961837333}
 --- !u!114 &1961837329
 MonoBehaviour:
   m_ObjectHideFlags: 0
