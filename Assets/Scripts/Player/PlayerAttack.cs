@@ -81,28 +81,27 @@ public class PlayerAttack : MonoBehaviour
     private void BeginAttack()
     {
         isAttacking = true;
-        transform.LookAt(currentEnemy.transform);
 
         playerAnimator.PlayShoot();
         //FireProjectile();
     }
 
     public void FireProjectile()
-{
-    if (!isAttacking) return;
-
-    if (currentEnemy == null)
     {
-        isAttacking = false;
-        return;
+        if (!isAttacking) return;
+
+        if (currentEnemy == null)
+        {
+            isAttacking = false;
+            return;
+        }
+
+        PlayerProjectile projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
+
+        projectile.Initialize(currentEnemy, playerStats.AttackDamage);
+
+        FinishAttack();
     }
-
-    PlayerProjectile projectile = Instantiate(projectilePrefab, projectileSpawnPoint.position, projectileSpawnPoint.rotation);
-
-    projectile.Initialize(currentEnemy, playerStats.AttackDamage);
-
-    FinishAttack();
-}
 
     private void FinishAttack()
     {
