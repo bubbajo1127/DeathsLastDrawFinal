@@ -81,7 +81,7 @@ public class PlayerAttack : MonoBehaviour
     private void BeginAttack()
     {
         isAttacking = true;
-
+        transform.LookAt(currentEnemy.transform);
         playerAnimator.PlayShoot();
         //FireProjectile();
     }
