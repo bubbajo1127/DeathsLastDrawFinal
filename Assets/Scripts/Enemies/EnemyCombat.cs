@@ -5,29 +5,51 @@ public abstract class EnemyCombat : MonoBehaviour
     [Header("References")]
     [SerializeField] protected EnemyStats enemyStats;
 
+    protected PlayerStats currentTarget;
+
     private float nextAttackTime;
+
+    public bool IsAttacking { get; protected set; }
 
     public bool TryAttack(PlayerStats target)
     {
-        if (target == null) return false;
+        if (target == null)
+            return false;
 
-        if (target.IsDead()) return false;
+        if (target.IsDead())
+            return false;
 
-        if (Time.time < nextAttackTime) return false;
+        if (IsAttacking)
+            return false;
 
-        PerformAttack(target);
+        if (Time.time < nextAttackTime)
+            return false;
 
-        float attackCooldown = 1f / Mathf.Max(enemyStats.AttackSpeed, 0.01f);
+        currentTarget = target;
+        IsAttacking = true;
 
-        nextAttackTime = Time.time + attackCooldown;
+        float cooldown =
+            1f / Mathf.Max(enemyStats.AttackSpeed, 0.01f);
+
+        nextAttackTime =
+            Time.time + cooldown;
+
+        StartAttack(target);
 
         return true;
     }
 
-    protected abstract void PerformAttack(PlayerStats target);
+    protected abstract void StartAttack(PlayerStats target);
+
+    protected void FinishAttack()
+    {
+        IsAttacking = false;
+    }
 
     public bool IsAttackReady()
     {
-        return Time.time >= nextAttackTime;
+        return
+            !IsAttacking &&
+            Time.time >= nextAttackTime;
     }
 }
