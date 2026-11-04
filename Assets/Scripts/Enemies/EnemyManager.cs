@@ -90,9 +90,12 @@ public class EnemyManager : MonoBehaviour
 
             case EnemyState.Attack:
 
-                enemyMovement.FaceTarget(
-                    playerTarget.transform
-                );
+                if (enemyCombat.ShouldTrackTargetRotation)
+                {
+                    enemyMovement.FaceTarget(
+                        playerTarget.transform
+                    );
+                }
 
                 enemyCombat.TryAttack(
                     playerTarget

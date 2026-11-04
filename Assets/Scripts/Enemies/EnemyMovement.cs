@@ -69,6 +69,19 @@ public class EnemyMovement : MonoBehaviour
         );
     }
 
+    public void MoveInDirection(Vector3 direction,float speed)
+    {
+        if (!navMeshAgent.enabled || !navMeshAgent.isOnNavMesh) return;
+
+        direction.y = 0f;
+
+        if (direction.sqrMagnitude <= 0.001f) return;
+
+        direction.Normalize();
+
+        navMeshAgent.Move(direction *speed *Time.deltaTime);
+    }
+
     public void DisableMovement()
     {
         if (navMeshAgent.enabled && navMeshAgent.isOnNavMesh)
