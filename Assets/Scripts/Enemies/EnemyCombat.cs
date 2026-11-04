@@ -8,6 +8,7 @@ public abstract class EnemyCombat : MonoBehaviour
     protected PlayerStats currentTarget;
 
     private float nextAttackTime;
+    public virtual bool ShouldTrackTargetRotation => true;
 
     public bool IsAttacking { get; protected set; }
 

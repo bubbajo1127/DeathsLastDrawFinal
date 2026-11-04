@@ -45,7 +45,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void TryAttackingEnemy()
     {
-        if (currentEnemy == null) return;
+        if (currentEnemy == null || movement.IsKnockedBack) return;
 
         float distance = Vector3.Distance(
             transform.position,
