@@ -49,19 +49,21 @@ public class EnemyManager : MonoBehaviour
 
     private void UpdateState()
     {
+        // Don't change states in the middle of an attack.
+        if (enemyCombat.IsAttacking)
+            return;
+
         float distance = Vector3.Distance(
             transform.position,
             playerTarget.transform.position
         );
 
-        // Player is close enough to attack.
         if (distance <= enemyStats.AttackRange)
         {
             ChangeState(EnemyState.Attack);
             return;
         }
 
-        // Player is close enough to chase.
         if (distance <= enemyStats.DetectionRange)
         {
             ChangeState(EnemyState.Chase);
