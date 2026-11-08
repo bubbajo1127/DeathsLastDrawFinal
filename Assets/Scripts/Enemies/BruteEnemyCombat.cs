@@ -26,8 +26,7 @@ public class BruteEnemyCombat : EnemyCombat
 
     private Vector3 chargeDirection;
 
-    public override bool ShouldTrackTargetRotation =>
-        !isCharging;
+    public override bool ShouldTrackTargetRotation => !isCharging;
 
     protected override void StartAttack(PlayerStats target)
     {
@@ -41,10 +40,7 @@ public class BruteEnemyCombat : EnemyCombat
     {
         hasHitPlayer = false;
 
-        // -------------------------
-        // WIND-UP
-        // -------------------------
-
+        // WIND UP
         float windupTimer = 0f;
 
         while (windupTimer < chargeWindup)
@@ -70,13 +66,8 @@ public class BruteEnemyCombat : EnemyCombat
             yield break;
         }
 
-        // -------------------------
         // LOCK CHARGE DIRECTION
-        // -------------------------
-
-        chargeDirection =
-            target.transform.position -
-            transform.position;
+        chargeDirection = target.transform.position - transform.position;
 
         chargeDirection.y = 0f;
         chargeDirection.Normalize();
@@ -94,21 +85,10 @@ public class BruteEnemyCombat : EnemyCombat
         float maximumChargeTime =
             (chargeDistance / chargeSpeed) + 1f;
 
-        // -------------------------
         // CHARGE
-        // -------------------------
-
-        while (
-            Vector3.Distance(
-                startPosition,
-                transform.position
-            ) < chargeDistance &&
-            safetyTimer < maximumChargeTime)
+        while (Vector3.Distance(startPosition,transform.position) < chargeDistance && safetyTimer < maximumChargeTime)
         {
-            enemyMovement.MoveInDirection(
-                chargeDirection,
-                chargeSpeed
-            );
+            enemyMovement.MoveInDirection(chargeDirection,chargeSpeed);
 
             CheckForPlayerHit();
 
@@ -117,10 +97,7 @@ public class BruteEnemyCombat : EnemyCombat
             yield return null;
         }
 
-        // -------------------------
         // FINISH
-        // -------------------------
-
         isCharging = false;
 
         FinishAttack();
