@@ -5,12 +5,13 @@ public class BruteEnemyCombat : EnemyCombat
 {
     [Header("References")]
     [SerializeField] private EnemyMovement enemyMovement;
-    [SerializeField] private EnemyAnimation enemyAnimation;
+    [SerializeField] private BruteEnemyAnimation bruteAnimation;
 
     [Header("Charge")]
     [SerializeField] private float chargeWindup = 0.5f;
     [SerializeField] private float chargeSpeed = 15f;
     [SerializeField] private float chargeDistance = 10f;
+    [SerializeField] private float chargeCooldown = 4f;
 
     [Header("Charge Hit")]
     [SerializeField] private Transform hitPoint;
@@ -27,6 +28,10 @@ public class BruteEnemyCombat : EnemyCombat
     private Vector3 chargeDirection;
 
     public override bool ShouldTrackTargetRotation => !isCharging;
+    protected override float GetAttackCooldown()
+    {
+        return chargeCooldown;
+    }
 
     protected override void StartAttack(PlayerStats target)
     {
@@ -35,12 +40,13 @@ public class BruteEnemyCombat : EnemyCombat
         );
     }
 
-    private IEnumerator ChargeRoutine(
-        PlayerStats target)
+    private IEnumerator ChargeRoutine(PlayerStats target)
     {
         hasHitPlayer = false;
 
         // WIND UP
+        bruteAnimation.PlayPrepareCharge();
+
         float windupTimer = 0f;
 
         while (windupTimer < chargeWindup)
@@ -51,9 +57,8 @@ public class BruteEnemyCombat : EnemyCombat
                 yield break;
             }
 
-            enemyMovement.FaceTarget(
-                target.transform
-            );
+            // Keep looking at the player during the entire telegraph.
+            enemyMovement.FaceTarget(target.transform);
 
             windupTimer += Time.deltaTime;
 
@@ -74,19 +79,16 @@ public class BruteEnemyCombat : EnemyCombat
 
         isCharging = true;
 
-        // Optional:
-        // enemyAnimation.PlayCharge();
+        bruteAnimation.PlayCharge();
 
-        Vector3 startPosition =
-            transform.position;
+        Vector3 startPosition = transform.position;
 
         float safetyTimer = 0f;
 
-        float maximumChargeTime =
-            (chargeDistance / chargeSpeed) + 1f;
+        float maximumChargeTime = (chargeDistance / chargeSpeed) + 1f;
 
         // CHARGE
-        while (Vector3.Distance(startPosition,transform.position) < chargeDistance && safetyTimer < maximumChargeTime)
+        while(Vector3.Distance(startPosition,transform.position) < chargeDistance && safetyTimer < maximumChargeTime)
         {
             enemyMovement.MoveInDirection(chargeDirection,chargeSpeed);
 
