@@ -22,8 +22,7 @@ public class EnemyManager : MonoBehaviour
         // Later the enemy spawner can assign the player.
         if (playerTarget == null)
         {
-            playerTarget =
-                FindFirstObjectByType<PlayerStats>();
+            playerTarget = FindFirstObjectByType<PlayerStats>();
         }
 
         ChangeState(EnemyState.Idle);
