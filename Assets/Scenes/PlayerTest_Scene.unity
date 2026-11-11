@@ -4510,7 +4510,7 @@ MonoBehaviour:
   enemyAnimation: {fileID: 1376008921}
   projectilePrefab: {fileID: 3167594976699834700, guid: 2b13c22646d61bd4189e375ae054b257, type: 3}
   projectileSpawnPoint: {fileID: 1167654211}
-  attackCooldown: 5
+  attackCooldown: 3
 --- !u!114 &1376008923
 MonoBehaviour:
   m_ObjectHideFlags: 0

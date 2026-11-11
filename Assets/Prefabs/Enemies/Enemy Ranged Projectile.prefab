@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b232a68bdad54b4189bfc91cabcd3de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyProjectile
-  moveSpeed: 12
+  moveSpeed: 14
   hitRadius: 0.35
   lifetime: 5
   playerLayer:
