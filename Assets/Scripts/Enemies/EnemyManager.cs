@@ -10,6 +10,11 @@ public class EnemyManager : MonoBehaviour
     [Header("Target")]
     [SerializeField] private PlayerStats playerTarget;
 
+    [Header("AI")]
+    [SerializeField] private bool useStandardAI = true;
+
+    private bool isInvulnerable;
+
     private EnemyState currentState = EnemyState.Idle;
 
     private bool isDead;
@@ -34,6 +39,9 @@ public class EnemyManager : MonoBehaviour
             return;
 
         if (playerTarget == null)
+            return;
+
+        if (!useStandardAI)
             return;
 
         if (playerTarget.IsDead())
@@ -155,15 +163,13 @@ public class EnemyManager : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        if (isDead)
+        if (isDead || isInvulnerable)
             return;
 
         enemyStats.TakeDamage(damage);
 
         if (enemyStats.IsDead())
-        {
             Die();
-        }
     }
 
     private void Die()
@@ -195,5 +201,10 @@ public class EnemyManager : MonoBehaviour
     public void SetTarget(PlayerStats target)
     {
         playerTarget = target;
+    }
+
+    public void SetInvulnerable(bool value)
+    {
+        isInvulnerable = value;
     }
 }

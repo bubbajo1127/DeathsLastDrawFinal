@@ -27,12 +27,22 @@ public class EnemyMovement : MonoBehaviour
             return;
 
         navMeshAgent.updateRotation = true;
-
         navMeshAgent.speed = enemyStats.MovementSpeed;
+        navMeshAgent.stoppingDistance = enemyStats.AttackRange * 0.8f;
+        navMeshAgent.SetDestination(target.position);
+    }
 
-        navMeshAgent.stoppingDistance =
-            enemyStats.AttackRange * 0.8f;
+    public void MoveTo(Transform target, float stoppingDistance)
+    {
+        if (target == null)
+            return;
 
+        if (!navMeshAgent.enabled || !navMeshAgent.isOnNavMesh)
+            return;
+
+        navMeshAgent.updateRotation = true;
+        navMeshAgent.speed = enemyStats.MovementSpeed;
+        navMeshAgent.stoppingDistance = stoppingDistance;
         navMeshAgent.SetDestination(target.position);
     }
 
