@@ -89,9 +89,7 @@ public class EnemyManager : MonoBehaviour
 
             case EnemyState.Chase:
 
-                enemyMovement.MoveTo(
-                    playerTarget.transform
-                );
+                enemyMovement.MoveTo(playerTarget.transform);
 
                 break;
 
