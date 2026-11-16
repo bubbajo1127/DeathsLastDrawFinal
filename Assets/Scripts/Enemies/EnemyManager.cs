@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 
 public class EnemyManager : MonoBehaviour
 {
@@ -20,6 +21,8 @@ public class EnemyManager : MonoBehaviour
     private bool isDead;
 
     public EnemyState CurrentState => currentState;
+
+    public event Action<EnemyManager> OnDied;
 
     private void Start()
     {
@@ -177,13 +180,25 @@ public class EnemyManager : MonoBehaviour
 
         isDead = true;
 
-        ChangeState(EnemyState.Dead);
+        if (enemyMovement != null)
+            enemyMovement.DisableMovement();
+
+        OnDied?.Invoke(this);
 
         Debug.Log(gameObject.name + " died.");
 
-        // Temporary.
-        // Later this is where the death animation will happen.
         Destroy(gameObject);
+    }
+
+    public void ForceKill()
+    {
+        if (isDead)
+            return;
+
+        if (!enemyStats.IsDead())
+            enemyStats.TakeDamage(enemyStats.CurrentHealth);
+
+        Die();
     }
 
     public float GetCurrentHealth()

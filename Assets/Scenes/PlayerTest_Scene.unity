@@ -6328,6 +6328,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2140491088}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &5954357990328913181
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3002156768529487137, guid: 66bf8d0fb6cf1f94faa4ee726365e199, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.662
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002156768529487137, guid: 66bf8d0fb6cf1f94faa4ee726365e199, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3.663
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002156768529487137, guid: 66bf8d0fb6cf1f94faa4ee726365e199, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 5.54414
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002156768529487137, guid: 66bf8d0fb6cf1f94faa4ee726365e199, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002156768529487137, guid: 66bf8d0fb6cf1f94faa4ee726365e199, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002156768529487137, guid: 66bf8d0fb6cf1f94faa4ee726365e199, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002156768529487137, guid: 66bf8d0fb6cf1f94faa4ee726365e199, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002156768529487137, guid: 66bf8d0fb6cf1f94faa4ee726365e199, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002156768529487137, guid: 66bf8d0fb6cf1f94faa4ee726365e199, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3002156768529487137, guid: 66bf8d0fb6cf1f94faa4ee726365e199, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6534461222710940566, guid: 66bf8d0fb6cf1f94faa4ee726365e199, type: 3}
+      propertyPath: m_Name
+      value: RectAttackTelegraph
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 66bf8d0fb6cf1f94faa4ee726365e199, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -6343,3 +6400,4 @@ SceneRoots:
   - {fileID: 1098378635}
   - {fileID: 938575169}
   - {fileID: 1615523923}
+  - {fileID: 5954357990328913181}

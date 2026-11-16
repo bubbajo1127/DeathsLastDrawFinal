@@ -5,8 +5,9 @@ public class BossController : MonoBehaviour
 {
     private enum BossState
     {
-        Combat,
+        PhaseOne,
         PhaseTransition,
+        PhaseTwo,
         Dead
     }
 
@@ -18,15 +19,12 @@ public class BossController : MonoBehaviour
     [SerializeField] private BossAttackSelector attackSelector;
     [SerializeField] private PlayerStats playerTarget;
 
-    [Header("Phases")]
+    [Header("Phase One")]
     [SerializeField] private BossPhaseData phaseOne;
-    [SerializeField] private BossPhaseData phaseTwo;
 
-    [Range(0f, 1f)]
-    [SerializeField] private float phaseTwoHealthPercent = 0.5f;
-
-    [Header("Phase Transition")]
-    [SerializeField] private float phaseTransitionDuration = 1.5f;
+    [Header("Phase Two")]
+    [SerializeField] private BossPhaseTwoController phaseTwoController;
+    [SerializeField, Range(0f, 1f)] private float phaseTwoHealthPercent = 0.3f;
 
     private BossState currentState;
     private BossPhaseData currentPhase;
@@ -34,8 +32,7 @@ public class BossController : MonoBehaviour
     private BossAttack currentAttack;
     private BossAttack lastAttack;
 
-    private bool phaseTransitionPending;
-    private bool transitionStarted;
+    private Coroutine currentAttackRoutine;
 
     public BossPhaseData CurrentPhase => currentPhase;
     public EnemyStats Stats => bossStats;
@@ -48,7 +45,7 @@ public class BossController : MonoBehaviour
             playerTarget = FindFirstObjectByType<PlayerStats>();
 
         currentPhase = phaseOne;
-        currentState = BossState.Combat;
+        currentState = BossState.PhaseOne;
 
         bossStats.OnHealthChanged += HandleHealthChanged;
     }
@@ -70,16 +67,8 @@ public class BossController : MonoBehaviour
         if (playerTarget == null || playerTarget.IsDead())
             return;
 
-        if (currentState != BossState.Combat)
+        if (currentState != BossState.PhaseOne)
             return;
-
-        if (phaseTransitionPending && currentAttack == null)
-        {
-            if (!transitionStarted)
-                StartCoroutine(TransitionToPhaseTwo());
-
-            return;
-        }
 
         if (currentAttack != null)
             return;
@@ -92,7 +81,7 @@ public class BossController : MonoBehaviour
 
         if (selectedAttack != null)
         {
-            StartCoroutine(PerformAttack(selectedAttack));
+            currentAttackRoutine = StartCoroutine(PerformAttack(selectedAttack));
             return;
         }
 
@@ -109,44 +98,58 @@ public class BossController : MonoBehaviour
 
         lastAttack = attack;
         currentAttack = null;
+        currentAttackRoutine = null;
     }
 
     private void Reposition()
     {
-        bossMovement.MoveTo(
-            playerTarget.transform,
-            currentPhase.PreferredDistance
-        );
+        bossMovement.MoveTo(playerTarget.transform, currentPhase.PreferredDistance);
     }
 
     private void HandleHealthChanged(float currentHealth, float maxHealth)
     {
-        if (currentPhase != phaseOne)
+        if (currentState != BossState.PhaseOne)
             return;
 
         if (currentHealth <= maxHealth * phaseTwoHealthPercent)
-            phaseTransitionPending = true;
+            StartCoroutine(TransitionToPhaseTwo());
     }
 
     private IEnumerator TransitionToPhaseTwo()
     {
-        transitionStarted = true;
         currentState = BossState.PhaseTransition;
 
+        enemyManager.SetInvulnerable(true);
         bossMovement.StopMovement();
 
-        enemyManager.SetInvulnerable(true);
+        CancelCurrentAttack();
 
-        bossAnimation.PlayPhaseTransition();
+        yield return phaseTwoController.BeginPhaseTwo(this);
 
-        yield return new WaitForSeconds(phaseTransitionDuration);
+        currentState = BossState.PhaseTwo;
+    }
 
-        currentPhase = phaseTwo;
+    private void CancelCurrentAttack()
+    {
+        if (currentAttackRoutine != null)
+        {
+            StopCoroutine(currentAttackRoutine);
+            currentAttackRoutine = null;
+        }
+
+        currentAttack = null;
+    }
+
+    public void CompletePhaseTwo()
+    {
+        if (currentState != BossState.PhaseTwo)
+            return;
+
+        currentState = BossState.Dead;
+
+        phaseTwoController.StopPhaseTwo();
 
         enemyManager.SetInvulnerable(false);
-
-        phaseTransitionPending = false;
-        transitionStarted = false;
-        currentState = BossState.Combat;
+        enemyManager.ForceKill();
     }
 }
