@@ -72,6 +72,7 @@ public class BossChargeAttack : BossAttack
         }
 
         boss.Movement.StopMovement();
+        boss.Animation.ReturnToLocomotion();
 
         yield return new WaitForSeconds(Data.RecoveryTime);
     }

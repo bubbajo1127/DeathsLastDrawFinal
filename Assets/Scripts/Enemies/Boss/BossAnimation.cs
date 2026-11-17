@@ -13,6 +13,8 @@ public class BossAnimation : MonoBehaviour
 
     private static readonly int SpeedHash = Animator.StringToHash("Speed");
 
+    private static readonly int ReturnHash = Animator.StringToHash("Return");
+
     private void Update()
     {
         float normalizedSpeed = 0f;
@@ -21,6 +23,11 @@ public class BossAnimation : MonoBehaviour
             normalizedSpeed = navMeshAgent.velocity.magnitude / navMeshAgent.speed;
 
         animator.SetFloat(SpeedHash, normalizedSpeed, movementDampTime, Time.deltaTime);
+    }
+
+    public void ReturnToLocomotion()
+    {
+        animator.SetTrigger(ReturnHash);
     }
 
     public void PlayAttack(BossAttackData attack)

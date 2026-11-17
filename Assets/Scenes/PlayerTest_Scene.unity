@@ -1096,7 +1096,7 @@ Transform:
   m_GameObject: {fileID: 169501155}
   serializedVersion: 2
   m_LocalRotation: {x: -0.09904573, y: 0.8923992, z: -0.23911768, w: -0.36964363}
-  m_LocalPosition: {x: 12.12, y: 13.38, z: 21.98}
+  m_LocalPosition: {x: -27.58, y: 13.38, z: 27.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6026,7 +6026,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 763bb2e104282954ea4d996784413333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BossProgressiveAOEAttack
-  attackData: {fileID: 11400000, guid: e569d55399e0a20489ef8474a2673f68, type: 2}
+  attackData: {fileID: 11400000, guid: 06b669eca7e91bb4b92f0a5c0fc06876, type: 2}
   aoeData: {fileID: 11400000, guid: ad734bc20372a744a9377ee672e05892, type: 2}
   telegraphPrefab: {fileID: 5954357990328913182}
   attackOrigin: {fileID: 1883152476}
