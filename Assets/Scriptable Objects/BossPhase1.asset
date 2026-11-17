@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 660298eebac4df14cb7564868bdfc361, type: 3}
   m_Name: BossPhase1
   m_EditorClassIdentifier: Assembly-CSharp::BossPhaseData
-  attacks: []
+  attacks:
+  - attack: {fileID: 11400000, guid: 00242268180211f499121972e6134321, type: 2}
+    weight: 3
+  - attack: {fileID: 11400000, guid: 06b669eca7e91bb4b92f0a5c0fc06876, type: 2}
+    weight: 1
   preferredDistance: 5
   cooldownMultiplier: 1
   damageMultiplier: 1

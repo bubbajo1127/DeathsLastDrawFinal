@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0f58ab666ac5baa49b6bc83aa3d20304, type: 3}
-  m_Name: BossAttackData
+  m_Name: BossAOEAttack
   m_EditorClassIdentifier: Assembly-CSharp::BossAttackData
-  attackName: 
-  animationTrigger: Attack
+  attackName: Progressive AOE
+  animationTrigger: ProgressiveAOE
   minRange: 0
-  maxRange: 10
-  cooldown: 3
+  maxRange: 20
+  cooldown: 4
   telegraphTime: 0.5
-  recoveryTime: 0.5
+  recoveryTime: 1
   damageMultiplier: 1

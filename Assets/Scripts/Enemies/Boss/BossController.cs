@@ -38,6 +38,7 @@ public class BossController : MonoBehaviour
     public EnemyStats Stats => bossStats;
     public EnemyMovement Movement => bossMovement;
     public BossAnimation Animation => bossAnimation;
+    public PlayerStats PlayerTarget => playerTarget;
 
     private void Start()
     {

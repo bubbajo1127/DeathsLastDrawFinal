@@ -26,25 +26,24 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
-        // Temporary convenience.
-        // Later the enemy spawner can assign the player.
+        if (!useStandardAI)
+            return;
+
         if (playerTarget == null)
-        {
             playerTarget = FindFirstObjectByType<PlayerStats>();
-        }
 
         ChangeState(EnemyState.Idle);
     }
 
     private void Update()
     {
+        if (!useStandardAI)
+            return;
+
         if (isDead)
             return;
 
         if (playerTarget == null)
-            return;
-
-        if (!useStandardAI)
             return;
 
         if (playerTarget.IsDead())
