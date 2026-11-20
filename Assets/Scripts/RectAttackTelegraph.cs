@@ -3,34 +3,39 @@ using UnityEngine;
 
 public class RectAttackTelegraph : MonoBehaviour
 {
-    [Header("References")]
     [SerializeField] private Transform background;
     [SerializeField] private Transform fill;
 
+    [Header("Width Animation")]
+    [SerializeField, Range(0f, 1f)] private float startingWidthPercent = 0.15f;
+
     public IEnumerator Play(float width, float length, float duration)
     {
-        // Full danger area.
-        background.localScale = new Vector3(width, length, 1f);
+        float startingWidth = width * startingWidthPercent;
+
+        background.localScale = new Vector3(startingWidth, length, 1f);
         background.localPosition = new Vector3(0f, 0.02f, length * 0.5f);
 
-        // Fill starts at zero.
-        fill.localScale = new Vector3(width, 0f, 1f);
-        fill.localPosition = new Vector3(0f, 0.03f, 0f);
+        fill.localScale = new Vector3(startingWidth, length, 1f);
+        fill.localPosition = new Vector3(0f, 0.03f, length * 0.5f);
 
         float timer = 0f;
 
         while (timer < duration)
         {
             timer += Time.deltaTime;
-
             float progress = Mathf.Clamp01(timer / duration);
-            float currentLength = length * progress;
 
-            fill.localScale = new Vector3(width, currentLength, 1f);
-            fill.localPosition = new Vector3(0f, 0.03f, currentLength * 0.5f);
+            float currentWidth = Mathf.Lerp(startingWidth, width, progress);
+
+            background.localScale = new Vector3(currentWidth, length, 1f);
+            fill.localScale = new Vector3(currentWidth, length, 1f);
 
             yield return null;
         }
+
+        background.localScale = new Vector3(width, length, 1f);
+        fill.localScale = new Vector3(width, length, 1f);
 
         Destroy(gameObject);
     }

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BossPhaseData
   attacks:
   - attack: {fileID: 11400000, guid: 00242268180211f499121972e6134321, type: 2}
-    weight: 0
+    weight: 1.5
   - attack: {fileID: 11400000, guid: 06b669eca7e91bb4b92f0a5c0fc06876, type: 2}
     weight: 1
   preferredDistance: 5

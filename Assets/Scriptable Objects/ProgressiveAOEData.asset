@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: ProgressiveAOEData
   m_EditorClassIdentifier: Assembly-CSharp::BossProgressiveAOEData
   layerCount: 6
-  width: 8
+  startingWidth: 3
+  widthIncreasePerLayer: 1.5
   layerLength: 3
   hitHeight: 2
   layerInterval: 0.2
   layerTelegraphTime: 0.6
-  damageMultiplier: 1
+  damageMultiplier: 2

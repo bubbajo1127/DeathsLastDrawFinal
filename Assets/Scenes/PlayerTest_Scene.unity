@@ -2715,8 +2715,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 550362177}
-  m_Layer: 0
-  m_Name: Projectile spawn point
+  m_Layer: 6
+  m_Name: Projectile spawn point (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3215,7 +3215,9 @@ GameObject:
   - component: {fileID: 818467386}
   - component: {fileID: 818467385}
   - component: {fileID: 818467384}
-  m_Layer: 0
+  - component: {fileID: 818467389}
+  - component: {fileID: 818467388}
+  m_Layer: 6
   m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3333,6 +3335,72 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 818467382}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &818467388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818467382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 961684dcdfbb63549bafa97dc2eb1e7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
+  enemyStats: {fileID: 818467389}
+  enemyMovement: {fileID: 0}
+  enemyCombat: {fileID: 0}
+  playerTarget: {fileID: 0}
+  useStandardAI: 1
+--- !u!114 &818467389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 818467382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f9f44c52b61b9f47afe6f1d8ddedd79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
+  maxHealth: 50
+  attackDamage: 15
+  movementSpeed: 5
+  attackRange: 1.5
+  attackSpeed: 1
+  detectionRange: 15
+--- !u!1 &822670967
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 822670968}
+  m_Layer: 0
+  m_Name: vfx spawn
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &822670968
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 822670967}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1615523923}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &827977979
 GameObject:
   m_ObjectHideFlags: 0
@@ -3761,7 +3829,9 @@ GameObject:
   - component: {fileID: 963372578}
   - component: {fileID: 963372577}
   - component: {fileID: 963372576}
-  m_Layer: 0
+  - component: {fileID: 963372581}
+  - component: {fileID: 963372580}
+  m_Layer: 6
   m_Name: Turret (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3799,7 +3869,7 @@ MonoBehaviour:
   enemyManager: {fileID: 1615523934}
   turretStats: {fileID: 1615523935}
   projectilePrefab: {fileID: 3167594976699834700, guid: 2b13c22646d61bd4189e375ae054b257, type: 3}
-  projectileSpawnPoint: {fileID: 550362177}
+  projectileSpawnPoint: {fileID: 1301955254}
   turretData: {fileID: 11400000, guid: 5a44dcc312aebe04bb0867fd9623a2bf, type: 2}
 --- !u!65 &963372577
 BoxCollider:
@@ -3879,6 +3949,41 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963372574}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &963372580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963372574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 961684dcdfbb63549bafa97dc2eb1e7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
+  enemyStats: {fileID: 963372581}
+  enemyMovement: {fileID: 0}
+  enemyCombat: {fileID: 0}
+  playerTarget: {fileID: 1961837325}
+  useStandardAI: 1
+--- !u!114 &963372581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 963372574}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f9f44c52b61b9f47afe6f1d8ddedd79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
+  maxHealth: 50
+  attackDamage: 15
+  movementSpeed: 5
+  attackRange: 1.5
+  attackSpeed: 1
+  detectionRange: 15
 --- !u!1001 &970117428
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4815,8 +4920,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1239804292}
-  m_Layer: 0
-  m_Name: Projectile spawn point
+  m_Layer: 6
+  m_Name: Projectile spawn point (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4846,8 +4951,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1301955254}
-  m_Layer: 0
-  m_Name: Projectile spawn point
+  m_Layer: 6
+  m_Name: Projectile spawn point (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4993,7 +5098,9 @@ GameObject:
   - component: {fileID: 1458935268}
   - component: {fileID: 1458935267}
   - component: {fileID: 1458935266}
-  m_Layer: 0
+  - component: {fileID: 1458935271}
+  - component: {fileID: 1458935270}
+  m_Layer: 6
   m_Name: Turret (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5031,7 +5138,7 @@ MonoBehaviour:
   enemyManager: {fileID: 1615523934}
   turretStats: {fileID: 1615523935}
   projectilePrefab: {fileID: 3167594976699834700, guid: 2b13c22646d61bd4189e375ae054b257, type: 3}
-  projectileSpawnPoint: {fileID: 550362177}
+  projectileSpawnPoint: {fileID: 1239804292}
   turretData: {fileID: 11400000, guid: 5a44dcc312aebe04bb0867fd9623a2bf, type: 2}
 --- !u!65 &1458935267
 BoxCollider:
@@ -5111,6 +5218,41 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1458935264}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1458935270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458935264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 961684dcdfbb63549bafa97dc2eb1e7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyManager
+  enemyStats: {fileID: 1458935271}
+  enemyMovement: {fileID: 0}
+  enemyCombat: {fileID: 0}
+  playerTarget: {fileID: 0}
+  useStandardAI: 1
+--- !u!114 &1458935271
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1458935264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f9f44c52b61b9f47afe6f1d8ddedd79, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyStats
+  maxHealth: 50
+  attackDamage: 15
+  movementSpeed: 5
+  attackRange: 1.5
+  attackSpeed: 1
+  detectionRange: 15
 --- !u!1 &1459615316
 GameObject:
   m_ObjectHideFlags: 0
@@ -5897,13 +6039,14 @@ Transform:
   m_GameObject: {fileID: 1615523922}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -58.92, y: 0.85, z: -7.97}
+  m_LocalPosition: {x: -58.92, y: 1.089, z: -7.97}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 970117429}
   - {fileID: 1883152476}
   - {fileID: 396010128}
+  - {fileID: 822670968}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &1615523924
@@ -5991,6 +6134,12 @@ MonoBehaviour:
   - {fileID: 818467384}
   - {fileID: 1458935266}
   - {fileID: 963372576}
+  bossTransitionVFXPrefab: {fileID: 1006680136956838, guid: e5efca12a16df2c4e828be391fa88b84, type: 3}
+  bossTransitionVFXPoint: {fileID: 822670968}
+  bossTransitionVFXLifetime: 3
+  turretSpawnVFXPrefab: {fileID: 1658448689254514, guid: 1d45734a67e531c43b87d8b56a4dcff5, type: 3}
+  turretSpawnVFXLifetime: 2
+  turretSpawnDelay: 0.5
 --- !u!114 &1615523928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6007,6 +6156,9 @@ MonoBehaviour:
   chargeAnimationTrigger: Charge
   chargeSpeed: 18
   chargeDistance: 12
+  chargeTelegraphPrefab: {fileID: 4673178149675754146, guid: a1f61289a8749da48a2f7bd2cc67d422, type: 3}
+  chargeOrigin: {fileID: 822670968}
+  chargeWidth: 3
   hitPoint: {fileID: 396010128}
   hitRadius: 1.5
   playerLayer:
@@ -6033,6 +6185,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 128
+  hitVFXPrefab: {fileID: 1481932562201786, guid: 7b11714ce9d7e1f47826b05270b779e1, type: 3}
+  hitVFXLifetime: 1.5
 --- !u!114 &1615523930
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6793,7 +6947,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerStats
   maxHealth: 100
-  attackDamage: 10
+  attackDamage: 100
   movementSpeed: 6
   attackRange: 6
   attackSpeed: 1

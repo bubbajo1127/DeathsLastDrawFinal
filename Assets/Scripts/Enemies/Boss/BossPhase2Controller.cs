@@ -10,6 +10,16 @@ public class BossPhaseTwoController : MonoBehaviour
     [Header("Turrets")]
     [SerializeField] private BossTurret[] turrets;
 
+    [Header("VFX")]
+    [SerializeField] private GameObject bossTransitionVFXPrefab;
+    [SerializeField] private Transform bossTransitionVFXPoint;
+    [SerializeField] private float bossTransitionVFXLifetime = 3f;
+
+    [SerializeField] private GameObject turretSpawnVFXPrefab;
+    [SerializeField] private float turretSpawnVFXLifetime = 2f;
+
+    [SerializeField] private float turretSpawnDelay = 0.5f;
+
     private BossController boss;
     private int turretsRemaining;
 
@@ -28,7 +38,13 @@ public class BossPhaseTwoController : MonoBehaviour
 
         boss.Animation.PlayPhaseTransition();
 
+        PlayBossTransitionVFX();
+
         yield return new WaitForSeconds(phaseData.TransitionDuration);
+
+        PlayTurretSpawnVFX();
+
+        yield return new WaitForSeconds(turretSpawnDelay);
 
         ActivateTurrets();
     }
@@ -66,6 +82,40 @@ public class BossPhaseTwoController : MonoBehaviour
 
         if (turretsRemaining <= 0)
             boss.CompletePhaseTwo();
+    }
+
+    private void PlayBossTransitionVFX()
+    {
+        if (bossTransitionVFXPrefab == null || bossTransitionVFXPoint == null)
+            return;
+
+        GameObject vfx = Instantiate(
+            bossTransitionVFXPrefab,
+            bossTransitionVFXPoint.position,
+            bossTransitionVFXPoint.rotation
+        );
+
+        Destroy(vfx, bossTransitionVFXLifetime);
+    }
+
+    private void PlayTurretSpawnVFX()
+    {
+        if (turretSpawnVFXPrefab == null)
+            return;
+
+        foreach (BossTurret turret in turrets)
+        {
+            if (turret == null)
+                continue;
+
+            GameObject vfx = Instantiate(
+                turretSpawnVFXPrefab,
+                turret.transform.position,
+                turret.transform.rotation
+            );
+
+            Destroy(vfx, turretSpawnVFXLifetime);
+        }
     }
 
     public void StopPhaseTwo()

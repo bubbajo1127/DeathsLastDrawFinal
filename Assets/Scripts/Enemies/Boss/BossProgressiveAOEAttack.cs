@@ -3,128 +3,105 @@ using UnityEngine;
 
 public class BossProgressiveAOEAttack : BossAttack
 {
-    [Header("References")]
+    [Header("AOE")]
     [SerializeField] private BossProgressiveAOEData aoeData;
     [SerializeField] private RectAttackTelegraph telegraphPrefab;
     [SerializeField] private Transform attackOrigin;
-
-    [Header("Hit Detection")]
     [SerializeField] private LayerMask playerLayer;
+
+    [Header("VFX")]
+    [SerializeField] private GameObject hitVFXPrefab;
+    [SerializeField] private float hitVFXLifetime = 2f;
+
+    private bool aoeTriggered;
 
     protected override IEnumerator ExecuteAttack(BossController boss, PlayerStats target)
     {
+        aoeTriggered = false;
+
         boss.Animation.PlayAttack(Data);
 
-        float timer = 0f;
-
-        // Initial wind-up. Boss keeps looking at player.
-        while (timer < Data.TelegraphTime)
+        // Wait for the animation event while continuing to face the player.
+        while (!aoeTriggered)
         {
             if (target == null || target.IsDead())
                 yield break;
 
             boss.Movement.FaceTarget(target.transform);
-
-            timer += Time.deltaTime;
             yield return null;
         }
 
-        // Lock direction once the attack begins.
+        // Lock the attack direction when the animation event occurs.
         Vector3 attackDirection = target.transform.position - attackOrigin.position;
         attackDirection.y = 0f;
+
+        if (attackDirection.sqrMagnitude <= 0.001f)
+            yield break;
+
         attackDirection.Normalize();
 
-        Quaternion attackRotation = Quaternion.LookRotation(attackDirection);
+        yield return StartCoroutine(PerformProgressiveAOE(boss, attackDirection));
 
-        float totalSequenceTime =
-            (aoeData.LayerCount - 1) * aoeData.LayerInterval +
-            aoeData.LayerTelegraphTime;
-
-        float sequenceTimer = 0f;
-        int nextTelegraph = 0;
-        int nextHit = 0;
-
-        while (sequenceTimer <= totalSequenceTime)
-        {
-            // Spawn new layers as the wave progresses.
-            while (
-                nextTelegraph < aoeData.LayerCount &&
-                sequenceTimer >= nextTelegraph * aoeData.LayerInterval)
-            {
-                SpawnTelegraph(
-                    attackDirection,
-                    attackRotation,
-                    nextTelegraph
-                );
-
-                nextTelegraph++;
-            }
-
-            // Damage layers when their individual telegraph finishes.
-            while (
-                nextHit < aoeData.LayerCount &&
-                sequenceTimer >=
-                nextHit * aoeData.LayerInterval +
-                aoeData.LayerTelegraphTime)
-            {
-                PerformLayerHit(
-                    boss,
-                    attackDirection,
-                    attackRotation,
-                    nextHit
-                );
-
-                nextHit++;
-            }
-
-            sequenceTimer += Time.deltaTime;
-            yield return null;
-        }
+        boss.Animation.ReturnToLocomotion();
 
         yield return new WaitForSeconds(Data.RecoveryTime);
     }
 
-    private void SpawnTelegraph(
-        Vector3 direction,
-        Quaternion rotation,
-        int layerIndex)
+    public void StartProgressiveAOE()
     {
-        Vector3 position =
-            attackOrigin.position +
-            direction * (aoeData.LayerLength * layerIndex);
-
-        RectAttackTelegraph telegraph = Instantiate(
-            telegraphPrefab,
-            position,
-            rotation
-        );
-
-        StartCoroutine(
-            telegraph.Play(
-                aoeData.Width,
-                aoeData.LayerLength,
-                aoeData.LayerTelegraphTime
-            )
-        );
+        aoeTriggered = true;
     }
 
-    private void PerformLayerHit(
-        BossController boss,
-        Vector3 direction,
-        Quaternion rotation,
-        int layerIndex)
+    private IEnumerator PerformProgressiveAOE(BossController boss, Vector3 direction)
     {
-        Vector3 startPosition =
-            attackOrigin.position +
-            direction * (aoeData.LayerLength * layerIndex);
+        for (int i = 0; i < aoeData.LayerCount; i++)
+        {
+            float layerWidth = aoeData.StartingWidth + aoeData.WidthIncreasePerLayer * i;
 
-        Vector3 center =
-            startPosition +
-            direction * (aoeData.LayerLength * 0.5f) +
-            Vector3.up * (aoeData.HitHeight * 0.5f);
+            Vector3 layerPosition = attackOrigin.position + direction * aoeData.LayerLength * i;
+
+            RectAttackTelegraph telegraph = Instantiate(
+                telegraphPrefab,
+                layerPosition,
+                Quaternion.LookRotation(direction)
+            );
+
+            StartCoroutine(telegraph.Play(
+                layerWidth,
+                aoeData.LayerLength,
+                aoeData.LayerTelegraphTime
+            ));
+
+            StartCoroutine(DamageLayerAfterTelegraph(
+                boss,
+                layerPosition,
+                direction,
+                layerWidth
+            ));
+
+            yield return new WaitForSeconds(aoeData.LayerInterval);
+        }
+
+        float finalWait = Mathf.Max(aoeData.LayerTelegraphTime - aoeData.LayerInterval, 0f);
+        yield return new WaitForSeconds(finalWait);
+    }
+
+    private IEnumerator DamageLayerAfterTelegraph(BossController boss, Vector3 position, Vector3 direction, float width)
+    {
+        yield return new WaitForSeconds(aoeData.LayerTelegraphTime);
+
+        Vector3 center = position + direction * (aoeData.LayerLength * 0.5f);
+
+        if (hitVFXPrefab != null)
+        {
+            GameObject hitVFX = Instantiate(hitVFXPrefab, center, Quaternion.LookRotation(direction));
+            Destroy(hitVFX, hitVFXLifetime);
+        }
+
+        center.y += aoeData.HitHeight * 0.5f;
 
         Vector3 halfExtents = new Vector3(
-            aoeData.Width * 0.5f,
+            width * 0.5f,
             aoeData.HitHeight * 0.5f,
             aoeData.LayerLength * 0.5f
         );
@@ -132,7 +109,7 @@ public class BossProgressiveAOEAttack : BossAttack
         Collider[] hits = Physics.OverlapBox(
             center,
             halfExtents,
-            rotation,
+            Quaternion.LookRotation(direction),
             playerLayer
         );
 
@@ -143,14 +120,9 @@ public class BossProgressiveAOEAttack : BossAttack
             if (player == null)
                 continue;
 
-            float damage =
-                boss.Stats.AttackDamage *
-                Data.DamageMultiplier *
-                aoeData.DamageMultiplier;
-
+            float damage = boss.Stats.AttackDamage * Data.DamageMultiplier * aoeData.DamageMultiplier;
             player.TakeDamage(damage);
-
-            return;
+            break;
         }
     }
 }

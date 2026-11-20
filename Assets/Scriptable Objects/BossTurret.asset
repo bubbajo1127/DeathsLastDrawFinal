@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: BossTurret
   m_EditorClassIdentifier: Assembly-CSharp::BossTurretData
   attackInterval: 3
-  burstCount: 3
+  burstCount: 6
   burstShotDelay: 0.15
   turretStaggerDelay: 0.5
   damageMultiplier: 1
