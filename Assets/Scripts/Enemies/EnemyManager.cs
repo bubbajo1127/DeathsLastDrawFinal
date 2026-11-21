@@ -14,6 +14,11 @@ public class EnemyManager : MonoBehaviour
     [Header("AI")]
     [SerializeField] private bool useStandardAI = true;
 
+    [Header("Targeting")]
+    [SerializeField] private Transform aimPoint;
+
+    public Transform AimPoint => aimPoint != null ? aimPoint : transform;
+
     private bool isInvulnerable;
 
     private EnemyState currentState = EnemyState.Idle;
@@ -179,12 +184,12 @@ public class EnemyManager : MonoBehaviour
 
         isDead = true;
 
-        if (enemyMovement != null)
-            enemyMovement.DisableMovement();
+        Debug.Log($"{name} EnemyManager died.");
 
         OnDied?.Invoke(this);
 
-        Debug.Log(gameObject.name + " died.");
+        if (enemyMovement != null)
+            enemyMovement.DisableMovement();
 
         Destroy(gameObject);
     }
@@ -194,9 +199,7 @@ public class EnemyManager : MonoBehaviour
         if (isDead)
             return;
 
-        if (!enemyStats.IsDead())
-            enemyStats.TakeDamage(enemyStats.CurrentHealth);
-
+        enemyStats.TakeDamage(enemyStats.CurrentHealth);
         Die();
     }
 

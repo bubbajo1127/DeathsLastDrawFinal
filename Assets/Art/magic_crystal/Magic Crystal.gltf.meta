@@ -1,0 +1,124 @@
+fileFormatVersion: 2
+guid: 9f84f59a69a113f43bc4b42f94f39040
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 715df9372183c47e389bb6e19fbc3b52, type: 3}
+  editorImportSettings:
+    generateSecondaryUVSet: 0
+  importSettings:
+    nodeNameMethod: 1
+    animationMethod: 2
+    generateMipMaps: 1
+    texturesReadable: 0
+    defaultMinFilterMode: 9729
+    defaultMagFilterMode: 9729
+    anisotropicFilterLevel: 1
+  instantiationSettings:
+    mask: -1
+    layer: 0
+    skinUpdateWhenOffscreen: 1
+    lightIntensityFactor: 1
+    sceneObjectCreation: 2
+  assetDependencies:
+  - type: 0
+    originalUri: Assets\Art\magic_crystal\scene.bin
+    assetPath: Assets\Art\magic_crystal\scene.bin
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Cristal_01initialShadingGroup_baseColor.png
+    assetPath: Assets\Art\magic_crystal\textures\Cristal_01initialShadingGroup_baseColor.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Cristal_01initialShadingGroup_metallicRoughness.png
+    assetPath: Assets\Art\magic_crystal\textures\Cristal_01initialShadingGroup_metallicRoughness.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Cristal_01initialShadingGroup_emissive.png
+    assetPath: Assets\Art\magic_crystal\textures\Cristal_01initialShadingGroup_emissive.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Cristal_01initialShadingGroup_normal.png
+    assetPath: Assets\Art\magic_crystal\textures\Cristal_01initialShadingGroup_normal.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Cristal_02initialShadingGroup_baseColor.png
+    assetPath: Assets\Art\magic_crystal\textures\Cristal_02initialShadingGroup_baseColor.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Cristal_02initialShadingGroup_metallicRoughness.png
+    assetPath: Assets\Art\magic_crystal\textures\Cristal_02initialShadingGroup_metallicRoughness.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Cristal_02initialShadingGroup_emissive.png
+    assetPath: Assets\Art\magic_crystal\textures\Cristal_02initialShadingGroup_emissive.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Cristal_02initialShadingGroup_normal.png
+    assetPath: Assets\Art\magic_crystal\textures\Cristal_02initialShadingGroup_normal.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_ABox004SG_baseColor.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_ABox004SG_baseColor.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_ABox004SG_metallicRoughness.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_ABox004SG_metallicRoughness.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_ABox004SG_emissive.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_ABox004SG_emissive.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_ABox004SG_normal.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_ABox004SG_normal.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_BBox004SG_baseColor.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_BBox004SG_baseColor.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_BBox004SG_metallicRoughness.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_BBox004SG_metallicRoughness.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_BBox004SG_emissive.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_BBox004SG_emissive.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_BBox004SG_normal.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_BBox004SG_normal.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_cBox004SG_baseColor.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_cBox004SG_baseColor.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_cBox004SG_metallicRoughness.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_cBox004SG_metallicRoughness.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_cBox004SG_emissive.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_cBox004SG_emissive.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_cBox004SG_normal.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_cBox004SG_normal.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_d1Box004SG_baseColor.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_d1Box004SG_baseColor.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_d1Box004SG_metallicRoughness.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_d1Box004SG_metallicRoughness.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_d1Box004SG_emissive.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_d1Box004SG_emissive.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_d1Box004SG_normal.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_d1Box004SG_normal.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_fBox004SG_baseColor.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_fBox004SG_baseColor.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_fBox004SG_metallicRoughness.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_fBox004SG_metallicRoughness.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_fBox004SG_emissive.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_fBox004SG_emissive.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_gBox004SG_baseColor.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_gBox004SG_baseColor.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_gBox004SG_metallicRoughness.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_gBox004SG_metallicRoughness.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_gBox004SG_emissive.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_gBox004SG_emissive.png
+  - type: 1
+    originalUri: Assets\Art\magic_crystal\textures\Crital_3_gBox004SG_normal.png
+    assetPath: Assets\Art\magic_crystal\textures\Crital_3_gBox004SG_normal.png
+  reportItems: []

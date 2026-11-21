@@ -146,6 +146,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed6c34b9b2dd8f34ba8a0eb97fc5bce8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WorldSpaceUI
+--- !u!1 &7423011229756685786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6610216760525100853}
+  m_Layer: 0
+  m_Name: AimPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6610216760525100853
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7423011229756685786}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.391, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7456060474443355374}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8865636356687327242
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,6 +216,7 @@ Transform:
   m_LocalScale: {x: 1.5869, y: 1.9528391, z: 1.5869}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 6610216760525100853}
   - {fileID: 5462833524415833122}
   - {fileID: 4836601818239856943}
   - {fileID: 4342150572095847290}
@@ -284,6 +316,8 @@ MonoBehaviour:
   enemyMovement: {fileID: 5452738674186364650}
   enemyCombat: {fileID: 9201139026019724375}
   playerTarget: {fileID: 0}
+  useStandardAI: 1
+  aimPoint: {fileID: 6610216760525100853}
 --- !u!114 &3948769078054065115
 MonoBehaviour:
   m_ObjectHideFlags: 0

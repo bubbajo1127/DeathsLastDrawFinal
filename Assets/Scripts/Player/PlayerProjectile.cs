@@ -29,13 +29,13 @@ public class PlayerProjectile : MonoBehaviour
 
     private void MoveTowardsTarget()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);
-        transform.LookAt(target.transform);
+        transform.position = Vector3.MoveTowards(transform.position, target.AimPoint.position, moveSpeed * Time.deltaTime);
+        transform.LookAt(target.AimPoint.position);
     }
 
     private void CheckForHit()
     {
-        float distance = Vector3.Distance(transform.position, target.transform.position);
+        float distance = Vector3.Distance(transform.position, target.AimPoint.position);
 
         if (distance <= hitDistance)
         {

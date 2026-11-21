@@ -61,27 +61,33 @@ public class BossPhaseTwoController : MonoBehaviour
                 continue;
 
             turret.gameObject.SetActive(true);
+
+            turret.OnDestroyed -= HandleTurretDestroyed;
             turret.OnDestroyed += HandleTurretDestroyed;
 
             float startDelay = i * turretData.TurretStaggerDelay;
-
-            turret.Activate(
-                boss.PlayerTarget,
-                startDelay
-            );
+            turret.Activate(boss.PlayerTarget, startDelay);
 
             turretsRemaining++;
         }
+
+        Debug.Log($"Phase 2 started with {turretsRemaining} turrets.");
     }
 
     private void HandleTurretDestroyed(BossTurret turret)
     {
+        Debug.Log("HandleTurretDestroyed is called");
         turret.OnDestroyed -= HandleTurretDestroyed;
 
         turretsRemaining--;
 
+        Debug.Log($"Turret destroyed. {turretsRemaining} remaining.");
+
         if (turretsRemaining <= 0)
+        {
+            Debug.Log("All turrets destroyed. Completing Phase 2.");
             boss.CompletePhaseTwo();
+        }
     }
 
     private void PlayBossTransitionVFX()

@@ -26,6 +26,11 @@ public class BossController : MonoBehaviour
     [SerializeField] private BossPhaseTwoController phaseTwoController;
     [SerializeField, Range(0f, 1f)] private float phaseTwoHealthPercent = 0.3f;
 
+    [Header("UI")]
+    [SerializeField] private string bossName = "Boss";
+
+    private BossHealthBarUI bossHealthBarUI;
+
     private BossState currentState;
     private BossPhaseData currentPhase;
 
@@ -44,6 +49,11 @@ public class BossController : MonoBehaviour
     {
         if (playerTarget == null)
             playerTarget = FindFirstObjectByType<PlayerStats>();
+
+        bossHealthBarUI = FindFirstObjectByType<BossHealthBarUI>(FindObjectsInactive.Include);
+
+        if (bossHealthBarUI != null)
+            bossHealthBarUI.ShowBoss(bossStats, bossName);
 
         currentPhase = phaseOne;
         currentState = BossState.PhaseOne;
@@ -143,12 +153,15 @@ public class BossController : MonoBehaviour
 
     public void CompletePhaseTwo()
     {
-        if (currentState != BossState.PhaseTwo)
+        if (currentState == BossState.Dead)
             return;
+
+        Debug.Log("Boss Phase 2 complete. Killing boss.");
 
         currentState = BossState.Dead;
 
-        phaseTwoController.StopPhaseTwo();
+        if (phaseTwoController != null)
+            phaseTwoController.StopPhaseTwo();
 
         enemyManager.SetInvulnerable(false);
         enemyManager.ForceKill();
