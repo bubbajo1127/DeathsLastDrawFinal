@@ -14,6 +14,9 @@ public class InputManager : MonoBehaviour
     public bool RightClickPressed { get; private set; }
     public bool LeftClickPressed { get; private set; }
 
+    public bool Ability1Pressed { get; private set; }
+    public bool Ability2Pressed { get; private set; }
+
     [Header("Raycast")]
     [SerializeField] private LayerMask mouseRaycastLayers;
 
@@ -42,16 +45,24 @@ public class InputManager : MonoBehaviour
 
     private void UpdateMouseInput()
     {
-        // Reset these each frame.
         RightClickPressed = false;
         LeftClickPressed = false;
+        Ability1Pressed = false;
+        Ability2Pressed = false;
+        StopMovementPressed = false;
 
-        if(Mouse.current == null) return;
+        if (Mouse.current != null)
+        {
+            RightClickPressed = Mouse.current.rightButton.wasPressedThisFrame;
+            LeftClickPressed = Mouse.current.leftButton.wasPressedThisFrame;
+        }
 
-        RightClickPressed = Mouse.current.rightButton.wasPressedThisFrame;
-        LeftClickPressed = Mouse.current.leftButton.wasPressedThisFrame;
-
-        StopMovementPressed = Keyboard.current != null && Keyboard.current.sKey.wasPressedThisFrame;
+        if (Keyboard.current != null)
+        {
+            Ability1Pressed = Keyboard.current.qKey.wasPressedThisFrame;
+            Ability2Pressed = Keyboard.current.wKey.wasPressedThisFrame;
+            StopMovementPressed = Keyboard.current.sKey.wasPressedThisFrame;
+        }
     }
 
     private void UpdateMouseWorldPosition()
@@ -79,5 +90,19 @@ public class InputManager : MonoBehaviour
             MouseHit = hit;
             MouseWorldPosition = hit.point;
         }
+    }
+
+    public bool TryGetMousePositionOnPlane(float height, out Vector3 worldPosition)
+    {
+        Plane plane = new Plane(Vector3.up, new Vector3(0f, height, 0f));
+
+        if (plane.Raycast(MouseRay, out float distance))
+        {
+            worldPosition = MouseRay.GetPoint(distance);
+            return true;
+        }
+
+        worldPosition = Vector3.zero;
+        return false;
     }
 }

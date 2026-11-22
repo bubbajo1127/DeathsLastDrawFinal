@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement")]
     [SerializeField] private float stoppingDistance = 0.1f;
 
+    private Coroutine dashRoutine;
+    public bool IsDashing { get; private set; }
+
     private Coroutine knockbackCoroutine;
     public bool IsKnockedBack { get; private set; }
 
@@ -41,9 +44,9 @@ public class PlayerMovement : MonoBehaviour
 
     public void MoveToPosition(Vector3 destination)
     {
-        if (IsKnockedBack) return;
+        if (IsDashing || IsKnockedBack) return;
 
-        if(NavMesh.SamplePosition(
+        if (NavMesh.SamplePosition(
             destination,
             out NavMeshHit navHit,
             2f,
@@ -56,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void MoveToTarget(Transform target, float distance)
     {
-        if (target == null || IsKnockedBack) return;
+        if (target == null || IsKnockedBack || IsDashing) return;
 
         navMeshAgent.stoppingDistance = distance;
         navMeshAgent.SetDestination(target.position);
@@ -121,5 +124,49 @@ public class PlayerMovement : MonoBehaviour
 
         IsKnockedBack = false;
         knockbackCoroutine = null;
+    }
+
+    public void Dash(Vector3 direction, float distance, float duration)
+    {
+        if (IsDashing || IsKnockedBack)
+            return;
+
+        if (dashRoutine != null)
+            StopCoroutine(dashRoutine);
+
+        dashRoutine = StartCoroutine(DashRoutine(direction, distance, duration));
+    }
+
+    private IEnumerator DashRoutine(Vector3 direction, float distance, float duration)
+    {
+        IsDashing = true;
+
+        StopMovement();
+
+        direction.y = 0f;
+
+        if (direction.sqrMagnitude <= 0.001f)
+        {
+            IsDashing = false;
+            yield break;
+        }
+
+        direction.Normalize();
+
+        transform.rotation = Quaternion.LookRotation(direction);
+
+        float speed = distance / Mathf.Max(duration, 0.01f);
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            navMeshAgent.Move(direction * speed * Time.deltaTime);
+
+            timer += Time.deltaTime;
+            yield return null;
+        }
+
+        IsDashing = false;
+        dashRoutine = null;
     }
 }

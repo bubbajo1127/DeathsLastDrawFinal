@@ -19,6 +19,9 @@ public class PlayerAnimator : MonoBehaviour
     private static readonly int DashHash =
         Animator.StringToHash("Dash");
 
+    private static readonly int BlastHash = 
+        Animator.StringToHash("Blast");
+
     private void Update()
     {
         UpdateMovementAnimation();
@@ -52,6 +55,11 @@ public class PlayerAnimator : MonoBehaviour
     public void PlayDash()
     {
         animator.SetTrigger(DashHash);
+    }
+
+    public void PlayBlast()
+    {
+        animator.SetTrigger(BlastHash);
     }
 
 }
