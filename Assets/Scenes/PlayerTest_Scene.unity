@@ -1784,6 +1784,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: b76b8dc48b5d9c348a66d6cd053d23c8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1253515509}
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: b76b8dc48b5d9c348a66d6cd053d23c8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1618931326}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b76b8dc48b5d9c348a66d6cd053d23c8, type: 3}
 --- !u!4 &282142403 stripped
@@ -4872,7 +4875,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1253515509}
   m_Layer: 0
-  m_Name: BlastSpawn
+  m_Name: BlastVFXSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5896,6 +5899,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1611729022}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1618931325
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1618931326}
+  m_Layer: 0
+  m_Name: BlastHitOrgin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1618931326
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618931325}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.015, y: 0.778, z: 0.193}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 282142403}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1673975956
 GameObject:
   m_ObjectHideFlags: 0
@@ -6541,8 +6575,10 @@ GameObject:
   - component: {fileID: 1961837327}
   - component: {fileID: 1961837325}
   - component: {fileID: 1961837326}
+  - component: {fileID: 1961837336}
   - component: {fileID: 1961837334}
   - component: {fileID: 1961837335}
+  - component: {fileID: 1961837337}
   - component: {fileID: 1961837324}
   - component: {fileID: 1961837332}
   m_Layer: 7
@@ -6814,12 +6850,52 @@ MonoBehaviour:
   inputManager: {fileID: 534592046}
   playerStats: {fileID: 1961837325}
   playerAnimation: {fileID: 1961837333}
-  blastOrigin: {fileID: 141345937}
+  blastHitOrigin: {fileID: 1618931326}
+  playerMovement: {fileID: 1961837329}
   enemyLayer:
     serializedVersion: 2
     m_Bits: 64
   blastVFXPrefab: {fileID: 4309692242953189965, guid: c8d9093c27b7caf42acb5cace33e27f8, type: 3}
-  blastVFXLifetime: 1
+  blastVFXLifetime: 0.25
+  blastVFXOrigin: {fileID: 1253515509}
+--- !u!114 &1961837336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961837322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 484cd2f4d5006a04ab1ed1e26ac7b88d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAbilityManager
+  inputManager: {fileID: 534592046}
+  availableAbilities: []
+  useTestingLoadout: 1
+  testingStartingAbilities: 010000000200000000000000
+--- !u!114 &1961837337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961837322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57a4cd7b1d61a9f46a4bc0f43c7be8a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerChargedShotAbility
+  chargedShotData: {fileID: 11400000, guid: 294d3176f3a1c5f40a1336842ab38d4a, type: 2}
+  inputManager: {fileID: 534592046}
+  playerStats: {fileID: 1961837325}
+  playerMovement: {fileID: 1961837329}
+  playerAnimator: {fileID: 1961837333}
+  projectileOrigin: {fileID: 141345937}
+  projectilePrefab: {fileID: 5669211747603919957}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1964890140
 GameObject:
   m_ObjectHideFlags: 0
@@ -7619,6 +7695,74 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6f161603ae68fe4caa7af7d19438659, type: 3}
+--- !u!1001 &5669211747603919956
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.47738
+      objectReference: {fileID: 0}
+    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.89
+      objectReference: {fileID: 0}
+    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 9.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7892784633787341152, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
+      propertyPath: m_Name
+      value: ChargedShotProjectile
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
+--- !u!114 &5669211747603919957 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 121642413562668334, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
+  m_PrefabInstance: {fileID: 5669211747603919956}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4ddbc8d986a93049b0b5d46ece202ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ChargedShotProjectile
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -7636,3 +7780,4 @@ SceneRoots:
   - {fileID: 2823519343207674902}
   - {fileID: 1824563243}
   - {fileID: 73955481}
+  - {fileID: 5669211747603919956}

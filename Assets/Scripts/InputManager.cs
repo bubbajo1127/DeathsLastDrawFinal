@@ -16,6 +16,7 @@ public class InputManager : MonoBehaviour
 
     public bool Ability1Pressed { get; private set; }
     public bool Ability2Pressed { get; private set; }
+    public bool Ability3Pressed { get; private set; }
 
     [Header("Raycast")]
     [SerializeField] private LayerMask mouseRaycastLayers;
@@ -49,6 +50,7 @@ public class InputManager : MonoBehaviour
         LeftClickPressed = false;
         Ability1Pressed = false;
         Ability2Pressed = false;
+        Ability3Pressed = false;
         StopMovementPressed = false;
 
         if (Mouse.current != null)
@@ -61,6 +63,7 @@ public class InputManager : MonoBehaviour
         {
             Ability1Pressed = Keyboard.current.qKey.wasPressedThisFrame;
             Ability2Pressed = Keyboard.current.wKey.wasPressedThisFrame;
+            Ability3Pressed = Keyboard.current.eKey.wasPressedThisFrame;
             StopMovementPressed = Keyboard.current.sKey.wasPressedThisFrame;
         }
     }

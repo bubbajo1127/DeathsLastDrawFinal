@@ -22,6 +22,10 @@ public class PlayerAnimator : MonoBehaviour
     private static readonly int BlastHash = 
         Animator.StringToHash("Blast");
 
+    private static readonly int ChargedHash =
+        Animator.StringToHash("Charged Blast");
+
+
     private void Update()
     {
         UpdateMovementAnimation();
@@ -60,6 +64,11 @@ public class PlayerAnimator : MonoBehaviour
     public void PlayBlast()
     {
         animator.SetTrigger(BlastHash);
+    }
+
+    public void PlayChargedShot()
+    {
+        animator.SetTrigger(ChargedHash);
     }
 
 }

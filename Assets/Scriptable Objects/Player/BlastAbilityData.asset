@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f817d3969a344f6489627471259f4a92, type: 3}
   m_Name: BlastAbilityData
   m_EditorClassIdentifier: Assembly-CSharp::BlastAbilityData
+  abilityName: Blast
   cooldown: 5
-  castRange: 7
-  blastLength: 10
-  blastWidth: 2
-  hitHeight: 2
+  castRange: 4.5
+  blastLength: 4.5
+  blastWidth: 1
+  hitHeight: 1
   damageMultiplier: 1.5

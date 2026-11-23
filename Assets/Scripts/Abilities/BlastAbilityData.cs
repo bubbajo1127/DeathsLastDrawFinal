@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "BlastAbilityData", menuName = "Death's Last Draw/Abilities/Blast")]
-public class BlastAbilityData : ScriptableObject
+public class BlastAbilityData : AbilityData
 {
     [Header("Level 1")]
     [SerializeField] private float cooldown = 5f;
@@ -10,6 +10,8 @@ public class BlastAbilityData : ScriptableObject
     [SerializeField] private float blastWidth = 2f;
     [SerializeField] private float hitHeight = 2f;
     [SerializeField] private float damageMultiplier = 1.5f;
+
+    public override AbilityType Type => AbilityType.Blast;
 
     public float Cooldown => cooldown;
     public float CastRange => castRange;

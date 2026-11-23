@@ -1,70 +1,86 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerBlastAbility : MonoBehaviour
+public class PlayerBlastAbility : PlayerAbility
 {
     [Header("References")]
     [SerializeField] private BlastAbilityData blastData;
     [SerializeField] private InputManager inputManager;
     [SerializeField] private PlayerStats playerStats;
     [SerializeField] private PlayerAnimator playerAnimation;
-    [SerializeField] private Transform blastOrigin;
+    [SerializeField] private Transform blastHitOrigin;
+    [SerializeField] private PlayerMovement playerMovement;
 
     [Header("Hit Detection")]
     [SerializeField] private LayerMask enemyLayer;
 
     [Header("VFX")]
     [SerializeField] private GameObject blastVFXPrefab;
-    [SerializeField] private float blastVFXLifetime = 2f;
+    [SerializeField] private float blastVFXLifetime = 0.5f;
+    [SerializeField] private Transform blastVFXOrigin;
 
     private float nextUseTime;
     private bool blastPending;
     private Vector3 pendingDirection;
 
+    public override AbilityData Data => blastData;
+
     private void Update()
     {
-        if (!inputManager.Ability2Pressed)
-            return;
-
-        TryBlast();
+        if (blastPending)
+            FaceBlastDirection();
     }
 
-    private void TryBlast()
+    public override bool TryUse()
     {
+        if (!IsUnlocked)
+            return false;
+
         if (playerStats.IsDead())
-            return;
+            return false;
 
         if (Time.time < nextUseTime)
-            return;
+            return false;
 
         if (blastPending)
-            return;
+            return false;
 
         if (!inputManager.HasMouseHit)
-            return;
+            return false;
 
         EnemyManager target = inputManager.MouseHit.collider.GetComponentInParent<EnemyManager>();
 
         if (target == null)
-            return;
+            return false;
 
         Vector3 direction = target.transform.position - transform.position;
         direction.y = 0f;
 
         if (direction.magnitude > blastData.CastRange)
-            return;
+            return false;
 
         if (direction.sqrMagnitude <= 0.001f)
-            return;
+            return false;
 
         pendingDirection = direction.normalized;
         blastPending = true;
 
-        transform.rotation = Quaternion.LookRotation(pendingDirection);
+        playerMovement.StopMovement();
+        FaceBlastDirection();
 
         playerAnimation.PlayBlast();
 
         nextUseTime = Time.time + blastData.Cooldown;
+
+        return true;
+    }
+
+    private void FaceBlastDirection()
+    {
+        if (pendingDirection.sqrMagnitude <= 0.001f)
+            return;
+
+        transform.rotation = Quaternion.LookRotation(pendingDirection);
     }
 
     public void FireBlast()
@@ -79,11 +95,11 @@ public class PlayerBlastAbility : MonoBehaviour
 
     private void PerformBlast(Vector3 direction)
     {
-        Vector3 origin = blastOrigin.position;
+        Vector3 hitOrigin = blastHitOrigin.position;
 
-        PlayBlastVFX(origin, direction);
+        PlayBlastVFX(blastVFXOrigin.position, direction);
 
-        Vector3 center = origin + direction * (blastData.BlastLength * 0.5f);
+        Vector3 center = hitOrigin + direction * (blastData.BlastLength * 0.5f);
         center.y += blastData.HitHeight * 0.5f;
 
         Vector3 halfExtents = new Vector3(
@@ -128,5 +144,31 @@ public class PlayerBlastAbility : MonoBehaviour
         );
 
         Destroy(vfx, blastVFXLifetime);
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        if (blastHitOrigin == null || blastData == null)
+            return;
+
+        Vector3 direction = transform.forward;
+
+        Vector3 center = blastHitOrigin.position + direction * (blastData.BlastLength * 0.5f);
+        center.y += blastData.HitHeight * 0.5f;
+
+        Gizmos.matrix = Matrix4x4.TRS(
+            center,
+            Quaternion.LookRotation(direction),
+            Vector3.one
+        );
+
+        Gizmos.DrawWireCube(
+            Vector3.zero,
+            new Vector3(
+                blastData.BlastWidth,
+                blastData.HitHeight,
+                blastData.BlastLength
+            )
+        );
     }
 }

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerDashAbility : MonoBehaviour
+public class PlayerDashAbility : PlayerAbility
 {
     [Header("References")]
     [SerializeField] private DashAbilityData dashData;
@@ -11,24 +11,21 @@ public class PlayerDashAbility : MonoBehaviour
 
     private float nextUseTime;
 
-    private void Update()
-    {
-        if (!inputManager.Ability1Pressed)
-            return;
+    public override AbilityData Data => dashData;
 
-        TryDash();
-    }
-
-    private void TryDash()
+    public override bool TryUse()
     {
+        if (!IsUnlocked)
+            return false;
+
         if (playerStats.IsDead())
-            return;
+            return false;
 
         if (playerMovement.IsDashing)
-            return;
+            return false;
 
         if (Time.time < nextUseTime)
-            return;
+            return false;
 
         Vector3 mousePosition;
 
@@ -38,18 +35,20 @@ public class PlayerDashAbility : MonoBehaviour
         }
         else if (!inputManager.TryGetMousePositionOnPlane(transform.position.y, out mousePosition))
         {
-            return;
+            return false;
         }
 
         Vector3 direction = mousePosition - transform.position;
         direction.y = 0f;
 
         if (direction.sqrMagnitude <= 0.001f)
-            return;
+            return false;
 
         playerAnimation.PlayDash();
         playerMovement.Dash(direction, dashData.DashDistance, dashData.DashDuration);
 
         nextUseTime = Time.time + dashData.Cooldown;
+
+        return true;
     }
 }
