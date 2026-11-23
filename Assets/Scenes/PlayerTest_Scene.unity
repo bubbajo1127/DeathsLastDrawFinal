@@ -798,9 +798,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3948769078054065115, guid: 89d319f9f0416114c83ed996ee529afa, type: 3}
+      propertyPath: maxHealth
+      value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3948769078054065115, guid: 89d319f9f0416114c83ed996ee529afa, type: 3}
+      propertyPath: movementSpeed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7456060474443355374, guid: 89d319f9f0416114c83ed996ee529afa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.820033
+      value: -12.09
       objectReference: {fileID: 0}
     - target: {fileID: 7456060474443355374, guid: 89d319f9f0416114c83ed996ee529afa, type: 3}
       propertyPath: m_LocalPosition.y
@@ -808,7 +816,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7456060474443355374, guid: 89d319f9f0416114c83ed996ee529afa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.5874605
+      value: -7.37
       objectReference: {fileID: 0}
     - target: {fileID: 7456060474443355374, guid: 89d319f9f0416114c83ed996ee529afa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1787,6 +1795,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: b76b8dc48b5d9c348a66d6cd053d23c8, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1618931326}
+    - targetCorrespondingSourceObject: {fileID: 1852576806548013000, guid: b76b8dc48b5d9c348a66d6cd053d23c8, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 393038754}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b76b8dc48b5d9c348a66d6cd053d23c8, type: 3}
 --- !u!4 &282142403 stripped
@@ -2296,6 +2307,37 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 379716142}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &393038753
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 393038754}
+  m_Layer: 0
+  m_Name: Spirit Ball Spawn Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &393038754
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 393038753}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1937468715}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &403185886
 GameObject:
   m_ObjectHideFlags: 0
@@ -2979,7 +3021,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::InputManager
   mouseRaycastLayers:
     serializedVersion: 2
-    m_Bits: 72
+    m_Bits: 328
 --- !u!4 &534592047
 Transform:
   m_ObjectHideFlags: 0
@@ -6350,6 +6392,11 @@ MonoBehaviour:
   m_MinRegionArea: 2
   m_NavMeshData: {fileID: 23800000, guid: bc74260cb2295dc44a3e498be965d8ee, type: 2}
   m_BuildHeightMesh: 0
+--- !u!4 &1937468715 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1852576806548013000, guid: b76b8dc48b5d9c348a66d6cd053d23c8, type: 3}
+  m_PrefabInstance: {fileID: 282142402}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1944867155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6579,6 +6626,7 @@ GameObject:
   - component: {fileID: 1961837334}
   - component: {fileID: 1961837335}
   - component: {fileID: 1961837337}
+  - component: {fileID: 1961837338}
   - component: {fileID: 1961837324}
   - component: {fileID: 1961837332}
   m_Layer: 7
@@ -6641,7 +6689,7 @@ MonoBehaviour:
   maxHealth: 100
   attackDamage: 100
   movementSpeed: 6
-  attackRange: 6
+  attackRange: 13
   attackSpeed: 1
   damageReduction: 0.51
   mana: 100
@@ -6854,7 +6902,7 @@ MonoBehaviour:
   playerMovement: {fileID: 1961837329}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 256
   blastVFXPrefab: {fileID: 4309692242953189965, guid: c8d9093c27b7caf42acb5cace33e27f8, type: 3}
   blastVFXLifetime: 0.25
   blastVFXOrigin: {fileID: 1253515509}
@@ -6873,7 +6921,7 @@ MonoBehaviour:
   inputManager: {fileID: 534592046}
   availableAbilities: []
   useTestingLoadout: 1
-  testingStartingAbilities: 010000000200000000000000
+  testingStartingAbilities: 010000000200000003000000
 --- !u!114 &1961837337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6892,10 +6940,32 @@ MonoBehaviour:
   playerMovement: {fileID: 1961837329}
   playerAnimator: {fileID: 1961837333}
   projectileOrigin: {fileID: 141345937}
-  projectilePrefab: {fileID: 5669211747603919957}
+  projectilePrefab: {fileID: 121642413562668334, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
   enemyLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 256
+--- !u!114 &1961837338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1961837322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4231035758d43cb42b2d4d15c065af23, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSpiritBallAbility
+  spiritBallData: {fileID: 11400000, guid: 16cf7353a934c9e4a98687fa72af0436, type: 2}
+  inputManager: {fileID: 534592046}
+  playerStats: {fileID: 1961837325}
+  playerMovement: {fileID: 1961837329}
+  playerAnimator: {fileID: 1961837333}
+  projectileOrigin: {fileID: 393038754}
+  projectilePrefab: {fileID: 2469225830255935432, guid: 60071403b94329444bf96e4c6cc5d976, type: 3}
+  enemyLayer:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &1964890140
 GameObject:
   m_ObjectHideFlags: 0
@@ -7695,74 +7765,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a6f161603ae68fe4caa7af7d19438659, type: 3}
---- !u!1001 &5669211747603919956
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 13.47738
-      objectReference: {fileID: 0}
-    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 1.89
-      objectReference: {fileID: 0}
-    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 9.12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2825201910045046541, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7892784633787341152, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
-      propertyPath: m_Name
-      value: ChargedShotProjectile
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
---- !u!114 &5669211747603919957 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 121642413562668334, guid: 219b0bb25f99b244d8ab51db2c29d1d3, type: 3}
-  m_PrefabInstance: {fileID: 5669211747603919956}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b4ddbc8d986a93049b0b5d46ece202ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ChargedShotProjectile
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -7780,4 +7782,3 @@ SceneRoots:
   - {fileID: 2823519343207674902}
   - {fileID: 1824563243}
   - {fileID: 73955481}
-  - {fileID: 5669211747603919956}
