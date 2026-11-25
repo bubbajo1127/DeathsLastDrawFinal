@@ -32,6 +32,7 @@ public class DungeonManager : MonoBehaviour
 
     public bool RoomGenerationEnabled => enableRoomGeneration;
     public RoomController CurrentRoom => currentRoom;
+    public bool IsNextRoomBoss => startingRoomLoaded && !bossRoomLoaded && (normalRoomsLoaded >= roomsBeforeBoss || availableRoomIndices.Count == 0);
 
     public void InitializeRoomPool()
     {
@@ -52,7 +53,7 @@ public class DungeonManager : MonoBehaviour
 
     public void ChooseDoor(RoomDoor selectedDoor)
     {
-        if (selectedDoor == null)
+        if (selectedDoor == null || !selectedDoor.IsUnlocked)
             return;
 
         runManager.TryAdvanceRoom();

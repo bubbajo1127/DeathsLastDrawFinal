@@ -125,10 +125,6 @@ public class RoomEnemySpawner : MonoBehaviour
         Debug.Log("All enemy waves cleared.");
 
         runManager.MarkRoomCleared();
-
-        // Temporary for normal rooms until Part 3B.
-        if (runManager.CurrentRoomType == RunRoomType.Normal)
-            UnlockDoorsAfterReward();
     }
 
     private void SetDoorsUnlocked(bool unlocked)

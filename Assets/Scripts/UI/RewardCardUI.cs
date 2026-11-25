@@ -13,13 +13,7 @@ public class RewardCardUI : MonoBehaviour
     [SerializeField] private TMP_Text buttonText;
     [SerializeField] private Button selectButton;
 
-    public void Setup(
-        Sprite icon,
-        string rewardName,
-        string rewardType,
-        string description,
-        string buttonLabel,
-        Action onSelected)
+    public void Setup(Sprite icon, string rewardName, string rewardType, string description, string buttonLabel, Action onSelected, bool isSelectable = true)
     {
         rewardIcon.sprite = icon;
         rewardIcon.enabled = icon != null;
@@ -28,6 +22,8 @@ public class RewardCardUI : MonoBehaviour
         rewardTypeText.text = rewardType;
         descriptionText.text = description;
         buttonText.text = buttonLabel;
+
+        selectButton.interactable = isSelectable;
 
         selectButton.onClick.RemoveAllListeners();
         selectButton.onClick.AddListener(() => onSelected?.Invoke());

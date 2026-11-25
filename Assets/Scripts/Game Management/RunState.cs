@@ -7,5 +7,6 @@ public enum RunState
     Victory,
     Defeat,
     LoadFailed,
-    SelectingRoomReward
+    SelectingRoomReward,
+    SelectingDoorReward
 }
