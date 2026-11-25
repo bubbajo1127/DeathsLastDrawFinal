@@ -10,7 +10,7 @@ public class CameraFollow : MonoBehaviour
 
     private Vector3 offset;
 
-    private void Start()
+    private void Awake()
     {
         if (target == null)
             return;

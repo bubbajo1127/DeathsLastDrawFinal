@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Movement")]
     [SerializeField] private float stoppingDistance = 0.1f;
+    [SerializeField] private float interactionStoppingBuffer = 0.25f;
 
     private Coroutine dashRoutine;
     public bool IsDashing { get; private set; }
@@ -61,8 +62,20 @@ public class PlayerMovement : MonoBehaviour
     {
         if (target == null || IsKnockedBack || IsDashing) return;
 
-        navMeshAgent.stoppingDistance = distance;
+        if (!navMeshAgent.enabled || !navMeshAgent.isOnNavMesh) return;
+
+        navMeshAgent.stoppingDistance = Mathf.Max(0f, distance - interactionStoppingBuffer);
         navMeshAgent.SetDestination(target.position);
+    }
+
+    public bool IsTargetInRange(Transform target, float range)
+    {
+        if (target == null) return false;
+
+        Vector3 direction = target.position - transform.position;
+        direction.y = 0f;
+
+        return direction.sqrMagnitude <= range * range;
     }
 
     public void StopMovement()

@@ -45,22 +45,14 @@ public class PlayerAttack : MonoBehaviour
 
     private void TryAttackingEnemy()
     {
-        if (currentEnemy == null || movement.IsKnockedBack) return;
-
-        float distance = Vector3.Distance(
-            transform.position,
-            currentEnemy.transform.position
-        );
+        if (currentEnemy == null || movement.IsKnockedBack || movement.IsDashing) return;
 
         // Enemy is outside attack range.
-        if (distance > playerStats.AttackRange)
+        if (!IsTargetInRange())
         {
             if (!isAttacking)
             {
-                movement.MoveToTarget(
-                    currentEnemy.transform,
-                    playerStats.AttackRange
-                );
+                movement.MoveToTarget(currentEnemy.transform, playerStats.AttackRange);
             }
 
             return;
@@ -131,13 +123,6 @@ public class PlayerAttack : MonoBehaviour
 
     public bool IsTargetInRange()
     {
-        if (currentEnemy == null) return false;
-
-        float distance = Vector3.Distance(
-            transform.position,
-            currentEnemy.transform.position
-        );
-
-        return distance <= playerStats.AttackRange;
+        return movement.IsTargetInRange(currentEnemy != null ? currentEnemy.transform : null, playerStats.AttackRange);
     }
 }

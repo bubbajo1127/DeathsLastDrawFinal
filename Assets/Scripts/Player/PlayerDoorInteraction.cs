@@ -40,15 +40,8 @@ public class PlayerDoorInteraction : MonoBehaviour
             return;
         }
 
-        float distance = Vector3.Distance(
-            transform.position,
-            currentDoor.InteractionPoint.position
-        );
-
-        Debug.Log("HandleDoorInteraction");
-        if (distance <= currentDoor.InteractionRange)
+        if (movement.IsTargetInRange(currentDoor.InteractionPoint, currentDoor.InteractionRange))
         {
-            Debug.Log("Enter Door should be called");
             EnterDoor();
         }
     }

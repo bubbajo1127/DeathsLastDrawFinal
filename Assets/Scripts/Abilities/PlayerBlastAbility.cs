@@ -56,8 +56,8 @@ public class PlayerBlastAbility : PlayerAbility
         Vector3 direction = target.transform.position - transform.position;
         direction.y = 0f;
 
-        if (direction.magnitude > blastData.CastRange)
-            return false;
+        if (!playerMovement.IsTargetInRange(target.transform, blastData.CastRange))
+            return false; 
 
         if (direction.sqrMagnitude <= 0.001f)
             return false;
