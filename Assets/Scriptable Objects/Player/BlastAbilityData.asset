@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: BlastAbilityData
   m_EditorClassIdentifier: Assembly-CSharp::BlastAbilityData
   abilityName: Blast
+  abilityIcon: {fileID: 21300000, guid: 0b3266358a4544d4884080e7cb1ed252, type: 3}
+  level1Description: Unleash a powerful blast through enemies
+  level2Description: Reduce the ability's cooldown
+  level3Description: Increase blast width and damage
   cooldown: 5
   castRange: 4.5
   blastLength: 4.5

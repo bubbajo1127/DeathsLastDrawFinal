@@ -5,6 +5,8 @@ public class RunManager : MonoBehaviour
 {
     [Header("References")]
     [SerializeField] private DungeonManager dungeonManager;
+    [SerializeField] private PlayerAbilityManager playerAbilityManager;
+    [SerializeField] private RewardSelectionUI rewardSelectionUI;
 
     [Header("Testing")]
     [SerializeField] private bool allowUnclearedRoomExit = true;
@@ -102,9 +104,56 @@ public class RunManager : MonoBehaviour
         if (CurrentRoomType == RunRoomType.Boss)
             return;
 
+        if (CurrentRoomType == RunRoomType.Starting)
+        {
+            SetState(RunState.SelectingRoomReward);
+
+            OnRoomCleared?.Invoke();
+
+            if (!rewardSelectionUI.ShowInitialAbilitySelection(playerAbilityManager, SelectInitialAbility))
+            {
+                Debug.LogError("Failed to open initial ability selection.");
+                SetState(RunState.LoadFailed);
+            }
+
+            return;
+        }
+
+        // Temporary normal room behavior until Part 3B.
         SetState(RunState.RoomCleared);
 
         OnRoomCleared?.Invoke();
+    }
+
+    private void SelectInitialAbility(AbilityType abilityType)
+    {
+        if (State != RunState.SelectingRoomReward)
+            return;
+
+        if (CurrentRoomType != RunRoomType.Starting)
+            return;
+
+        if (playerAbilityManager.LearnedAbilityCount != 0)
+            return;
+
+        RoomEnemySpawner spawner = dungeonManager.CurrentRoom.GetComponent<RoomEnemySpawner>();
+
+        if (spawner == null)
+        {
+            Debug.LogError("Current room is missing its enemy spawner.");
+            return;
+        }
+
+        if (!playerAbilityManager.LearnAbility(abilityType))
+            return;
+
+        Debug.Log($"Initial ability selected: {abilityType}");
+
+        rewardSelectionUI.Close();
+
+        SetState(RunState.RoomCleared);
+
+        spawner.UnlockDoorsAfterReward();
     }
 
     public void CompleteRun()

@@ -18,6 +18,8 @@ public class InputManager : MonoBehaviour
     public bool Ability2Pressed { get; private set; }
     public bool Ability3Pressed { get; private set; }
 
+    public bool IsGameplayInputLocked { get; private set; }
+
     [Header("Raycast")]
     [SerializeField] private LayerMask mouseRaycastLayers;
 
@@ -46,12 +48,10 @@ public class InputManager : MonoBehaviour
 
     private void UpdateMouseInput()
     {
-        RightClickPressed = false;
-        LeftClickPressed = false;
-        Ability1Pressed = false;
-        Ability2Pressed = false;
-        Ability3Pressed = false;
-        StopMovementPressed = false;
+        ClearGameplayInput();
+
+        if (IsGameplayInputLocked)
+            return;
 
         if (Mouse.current != null)
         {
@@ -107,5 +107,22 @@ public class InputManager : MonoBehaviour
 
         worldPosition = Vector3.zero;
         return false;
+    }
+
+    public void SetGameplayInputLocked(bool locked)
+    {
+        IsGameplayInputLocked = locked;
+
+        if(locked) ClearGameplayInput();
+    }
+
+    private void ClearGameplayInput()
+    {
+        RightClickPressed = false;
+        LeftClickPressed = false;
+        Ability1Pressed = false;
+        Ability2Pressed = false;
+        Ability3Pressed = false;
+        StopMovementPressed = false;
     }
 }

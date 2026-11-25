@@ -126,9 +126,9 @@ public class RoomEnemySpawner : MonoBehaviour
 
         runManager.MarkRoomCleared();
 
-        // Temporary until reward selection is implemented.
-        if (runManager.State == RunState.RoomCleared)
-            SetDoorsUnlocked(true);
+        // Temporary for normal rooms until Part 3B.
+        if (runManager.CurrentRoomType == RunRoomType.Normal)
+            UnlockDoorsAfterReward();
     }
 
     private void SetDoorsUnlocked(bool unlocked)
@@ -148,6 +148,17 @@ public class RoomEnemySpawner : MonoBehaviour
         return runManager != null &&
                runManager.State == RunState.InRoom &&
                runManager.CurrentRoomNumber == roomNumber;
+    }
+
+    public void UnlockDoorsAfterReward()
+    {
+        if (!IsRoomCleared)
+            return;
+
+        if (runManager == null || runManager.State != RunState.RoomCleared)
+            return;
+
+        SetDoorsUnlocked(true);
     }
 
     private bool ValidateConfiguration(RunRoomType roomType)

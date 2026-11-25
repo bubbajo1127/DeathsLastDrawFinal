@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: ChargedShotAbilityData
   m_EditorClassIdentifier: Assembly-CSharp::ChargedShotAbilityData
   abilityName: Charged Shot
+  abilityIcon: {fileID: 21300000, guid: 449e07f2d82df5a498c7b90f2892b9f4, type: 3}
+  level1Description: Fire a powerful projectile that damages the first enemy hit.
+  level2Description: Increases projectile damage
+  level3Description: Projectile pierces through enemies
   cooldown: 6
   projectileSpeed: 25
   maxDistance: 20

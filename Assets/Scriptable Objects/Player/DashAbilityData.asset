@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: DashAbilityData
   m_EditorClassIdentifier: Assembly-CSharp::DashAbilityData
   abilityName: Dash
+  abilityIcon: {fileID: 21300000, guid: 319a6b3e7ec2bf141aa1ef51675c34f5, type: 3}
+  level1Description: Quickly dash toward your cursor
+  level2Description: Your next basic attack deals bonus damage
+  level3Description: Your empowered attack also hits an additional enemy
   cooldown: 5
   dashDistance: 4
   dashDuration: 0.2
