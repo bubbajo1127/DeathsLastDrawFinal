@@ -9,8 +9,6 @@ public class PlayerDashAbility : PlayerAbility
     [SerializeField] private PlayerAnimator playerAnimation;
     [SerializeField] private PlayerStats playerStats;
 
-    private float nextUseTime;
-
     public override AbilityData Data => dashData;
 
     public override bool TryUse()
@@ -24,7 +22,7 @@ public class PlayerDashAbility : PlayerAbility
         if (playerMovement.IsDashing)
             return false;
 
-        if (Time.time < nextUseTime)
+        if (IsOnCooldown)
             return false;
 
         Vector3 mousePosition;
@@ -47,7 +45,7 @@ public class PlayerDashAbility : PlayerAbility
         playerAnimation.PlayDash();
         playerMovement.Dash(direction, dashData.DashDistance, dashData.DashDuration);
 
-        nextUseTime = Time.time + dashData.Cooldown;
+        StartCooldown(dashData.Cooldown);
 
         return true;
     }

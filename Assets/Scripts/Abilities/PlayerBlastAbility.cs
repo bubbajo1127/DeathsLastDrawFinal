@@ -19,7 +19,6 @@ public class PlayerBlastAbility : PlayerAbility
     [SerializeField] private float blastVFXLifetime = 0.5f;
     [SerializeField] private Transform blastVFXOrigin;
 
-    private float nextUseTime;
     private bool blastPending;
     private Vector3 pendingDirection;
 
@@ -39,7 +38,7 @@ public class PlayerBlastAbility : PlayerAbility
         if (playerStats.IsDead())
             return false;
 
-        if (Time.time < nextUseTime)
+        if (IsOnCooldown)
             return false;
 
         if (blastPending)
@@ -70,7 +69,7 @@ public class PlayerBlastAbility : PlayerAbility
 
         playerAnimation.PlayBlast();
 
-        nextUseTime = Time.time + blastData.Cooldown;
+        StartCooldown(blastData.Cooldown);
 
         return true;
     }

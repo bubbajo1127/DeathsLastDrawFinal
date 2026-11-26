@@ -14,7 +14,6 @@ public class PlayerSpiritBallAbility : PlayerAbility
     [SerializeField] private SpiritBallProjectile projectilePrefab;
     [SerializeField] private LayerMask enemyLayer;
 
-    private float nextUseTime;
     private bool throwPending;
     private Vector3 pendingTargetPosition;
     private Vector3 pendingDirection;
@@ -35,7 +34,7 @@ public class PlayerSpiritBallAbility : PlayerAbility
         if (playerStats.IsDead())
             return false;
 
-        if (Time.time < nextUseTime)
+        if (IsOnCooldown)
             return false;
 
         if (throwPending)
@@ -74,7 +73,7 @@ public class PlayerSpiritBallAbility : PlayerAbility
 
         playerAnimator.PlaySpiritBall();
 
-        nextUseTime = Time.time + spiritBallData.Cooldown;
+        StartCooldown(spiritBallData.Cooldown);
 
         return true;
     }

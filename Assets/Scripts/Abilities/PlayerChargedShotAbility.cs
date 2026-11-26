@@ -14,7 +14,6 @@ public class PlayerChargedShotAbility : PlayerAbility
     [SerializeField] private ChargedShotProjectile projectilePrefab;
     [SerializeField] private LayerMask enemyLayer;
 
-    private float nextUseTime;
     private bool shotPending;
     private Vector3 pendingDirection;
 
@@ -34,7 +33,7 @@ public class PlayerChargedShotAbility : PlayerAbility
         if (playerStats.IsDead())
             return false;
 
-        if (Time.time < nextUseTime)
+        if (IsOnCooldown)
             return false;
 
         if (shotPending)
@@ -65,7 +64,7 @@ public class PlayerChargedShotAbility : PlayerAbility
 
         playerAnimator.PlayChargedShot();
 
-        nextUseTime = Time.time + chargedShotData.Cooldown;
+        StartCooldown(chargedShotData.Cooldown);
 
         return true;
     }
